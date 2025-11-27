@@ -14,11 +14,11 @@ async function startServer() {
     // Iniciar cron jobs
     cronService.startAll()
 
-    // Iniciar servidor
-    app.listen(PORT, () => {
+    // Iniciar servidor (0.0.0.0 para Railway)
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server running on port ${PORT}`)
       console.log(`📍 Environment: ${env.NODE_ENV}`)
-      console.log(`🔗 Health check: http://localhost:${PORT}/health`)
+      console.log(`🔗 Health check: http://0.0.0.0:${PORT}/health`)
       console.log(`🌐 Frontend URL: ${env.FRONTEND_URL}`)
     })
   } catch (error) {

@@ -17,8 +17,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
 
   // JWT
-  JWT_SECRET: z.string().min(20, 'JWT_SECRET must be at least 20 characters'),
-  JWT_REFRESH_SECRET: z.string().min(20, 'JWT_REFRESH_SECRET must be at least 20 characters'),
+  JWT_SECRET: z.string().min(20, 'JWT_SECRET must be at least 20 characters').default('change-me-in-production-min-20-chars-required'),
+  JWT_REFRESH_SECRET: z.string().min(20, 'JWT_REFRESH_SECRET must be at least 20 characters').default('change-me-refresh-secret-min-20-chars'),
   JWT_EXPIRES_IN: z.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
 
