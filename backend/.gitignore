@@ -37,3 +37,6 @@ prisma/*.db-journal
 # Medical Library
 medlibrary/original_pdfs/*.pdf
 medlibrary/logs/*.log
+
+# Work in Progress
+.wip/
