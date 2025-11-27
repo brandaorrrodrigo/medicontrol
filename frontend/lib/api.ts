@@ -540,3 +540,181 @@ export async function getPatientMedicationPhotos(patientId: string, type?: strin
   const params = type ? `?type=${type}` : ''
   return await fetchAPI<any[]>(`/patients/${patientId}/medication-photos${params}`)
 }
+
+// ============================================================================
+// ALERTS APIs
+// ============================================================================
+
+/**
+ * Lista alertas do paciente com filtros opcionais
+ */
+export async function getAlerts(filters?: {
+  type?: string
+  severity?: string
+  read?: boolean
+  resolved?: boolean
+  medicationId?: string
+  limit?: number
+  offset?: number
+}): Promise<{
+  alerts: any[]
+  total: number
+  limit: number
+  offset: number
+  hasMore: boolean
+}> {
+  const params = new URLSearchParams()
+  if (filters?.type) params.append('type', filters.type)
+  if (filters?.severity) params.append('severity', filters.severity)
+  if (filters?.read !== undefined) params.append('read', String(filters.read))
+  if (filters?.resolved !== undefined) params.append('resolved', String(filters.resolved))
+  if (filters?.medicationId) params.append('medicationId', filters.medicationId)
+  if (filters?.limit) params.append('limit', String(filters.limit))
+  if (filters?.offset) params.append('offset', String(filters.offset))
+
+  const query = params.toString()
+  return await fetchAPI(`/alerts${query ? `?${query}` : ''}`)
+}
+
+/**
+ * Conta alertas não lidos
+ */
+export async function countUnreadAlerts(): Promise<{ count: number }> {
+  return await fetchAPI('/alerts/count')
+}
+
+/**
+ * Marca alerta como lido
+ */
+export async function markAlertAsRead(alertId: string): Promise<void> {
+  await fetchAPI(`/alerts/${alertId}/read`, {
+    method: 'PATCH',
+  })
+}
+
+/**
+ * Marca alerta como resolvido
+ */
+export async function resolveAlert(alertId: string): Promise<void> {
+  await fetchAPI(`/alerts/${alertId}/resolve`, {
+    method: 'PATCH',
+  })
+}
+
+/**
+ * Marca todos alertas como lidos
+ */
+export async function markAllAlertsAsRead(type?: string): Promise<{ count: number }> {
+  return await fetchAPI('/alerts/read-all', {
+    method: 'POST',
+    body: JSON.stringify(type ? { type } : {}),
+  })
+}
+
+/**
+ * Regenera alertas do paciente (DEBUG)
+ */
+export async function refreshAlerts(data?: {
+  medicationId?: string
+  types?: string[]
+}): Promise<void> {
+  await fetchAPI('/alerts/refresh', {
+    method: 'POST',
+    body: JSON.stringify(data || {}),
+  })
+}
+
+// ============================================================================
+// STOCK APIs
+// ============================================================================
+
+/**
+ * Cria estoque para um medicamento
+ */
+export async function createMedicationStock(
+  medicationId: string,
+  data: {
+    currentQuantity: number
+    initialQuantity: number
+    unitType: string
+    lowStockThreshold?: number
+    criticalStockThreshold?: number
+    lastRestockDate?: string
+    nextRestockDate?: string
+    notes?: string
+  }
+): Promise<any> {
+  return await fetchAPI(`/medications/${medicationId}/stock`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+/**
+ * Busca estoque de um medicamento
+ */
+export async function getMedicationStock(medicationId: string): Promise<any | null> {
+  try {
+    return await fetchAPI(`/medications/${medicationId}/stock`)
+  } catch (error: any) {
+    if (error.message?.includes('404') || error.message?.includes('não encontrado')) {
+      return null
+    }
+    throw error
+  }
+}
+
+/**
+ * Atualiza estoque de um medicamento
+ */
+export async function updateMedicationStock(
+  medicationId: string,
+  data: {
+    currentQuantity?: number
+    lowStockThreshold?: number
+    criticalStockThreshold?: number
+    lastRestockDate?: string
+    nextRestockDate?: string
+    notes?: string
+  }
+): Promise<any> {
+  return await fetchAPI(`/medications/${medicationId}/stock`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+}
+
+/**
+ * Consome quantidade do estoque (ao tomar medicamento)
+ */
+export async function consumeMedicationStock(
+  medicationId: string,
+  quantity: number
+): Promise<any> {
+  return await fetchAPI(`/medications/${medicationId}/stock/consume`, {
+    method: 'POST',
+    body: JSON.stringify({ quantity }),
+  })
+}
+
+/**
+ * Reabastece estoque do medicamento
+ */
+export async function restockMedication(
+  medicationId: string,
+  quantity: number
+): Promise<any> {
+  return await fetchAPI(`/medications/${medicationId}/stock/restock`, {
+    method: 'POST',
+    body: JSON.stringify({ quantity }),
+  })
+}
+
+/**
+ * Deleta estoque de um medicamento
+ */
+export async function deleteMedicationStock(medicationId: string): Promise<void> {
+  await fetchAPI(`/medications/${medicationId}/stock`, {
+    method: 'DELETE',
+  })
+}

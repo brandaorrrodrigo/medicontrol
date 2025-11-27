@@ -18,6 +18,7 @@ MedicControl é uma plataforma web moderna e completa para gestão de saúde, of
 - ✅ **Consultas e Agendamentos**
 - ✅ **Notificações em Tempo Real**
 - ✅ **Sistema de Cron Jobs** para lembretes automáticos
+- ✅ **Biblioteca Farmacológica com IA** - Extração automática de conhecimento de eBooks médicos
 
 ## 🎯 Tipos de Usuários
 
@@ -49,6 +50,8 @@ MedicControl é uma plataforma web moderna e completa para gestão de saúde, of
 - **JWT** - Autenticação
 - **Zod** - Validação
 - **node-cron** - Tarefas agendadas
+- **Ollama** - LLM local para extração de conhecimento
+- **pdf-parse** - Processamento de PDFs
 
 ### Frontend
 - **Next.js 14** - Framework React
@@ -98,6 +101,13 @@ npm run dev
 # Rodando em http://localhost:3000
 ```
 
+**Terminal 3 (Opcional) - Ollama para Biblioteca Farmacológica:**
+```bash
+ollama serve
+# Rodando em http://localhost:11434
+# Necessário apenas se for usar o módulo de biblioteca farmacológica
+```
+
 ### 4. Login
 
 Acesse `http://localhost:3000` e use:
@@ -114,6 +124,7 @@ Acesse `http://localhost:3000` e use:
 - **[PROJECT_STATUS.md](./PROJECT_STATUS.md)** - Status detalhado do projeto
 - **[backend/README.md](./backend/README.md)** - Documentação da API
 - **[frontend/README.md](./frontend/README.md)** - Documentação do Frontend
+- **[backend/medlibrary/README.md](./backend/medlibrary/README.md)** - Biblioteca Farmacológica com IA
 
 ## 📊 Status do Projeto
 
@@ -215,6 +226,17 @@ Acesse `http://localhost:3000` e use:
 - [x] Lembretes de consultas (1h)
 - [x] Prevenção de duplicatas
 
+### Biblioteca Farmacológica (AI-Powered) 🆕
+- [x] Extração automática de PDFs médicos
+- [x] Processamento com LLM local (Ollama)
+- [x] Identificação de interações medicamentosas
+- [x] Identificação de interações com alimentos
+- [x] Extração de efeitos desejados e adversos
+- [x] Pipeline de qualidade (dedup + validação + agregação)
+- [x] Workflow de aprovação humana
+- [x] Migração para tabelas de produção
+- [x] Scripts CLI para ingestão e aprovação
+
 ## 📁 Estrutura do Projeto
 
 ```
@@ -230,9 +252,14 @@ MedicControl/
 │   │   ├── prescriptions/  # Prescrições
 │   │   ├── notifications/  # Notificações
 │   │   ├── cron/           # Tarefas agendadas
+│   │   ├── medlibrary/     # Biblioteca farmacológica (IA)
 │   │   ├── common/         # Email e serviços comuns
 │   │   └── ...
 │   ├── prisma/             # Schema e migrations
+│   ├── medlibrary/         # PDFs e dados processados
+│   │   ├── original_pdfs/  # eBooks médicos fonte
+│   │   ├── processed_json/ # Dados extraídos
+│   │   └── logs/           # Logs de processamento
 │   └── uploads/            # Arquivos uploaded
 │
 ├── frontend/               # Next.js + React

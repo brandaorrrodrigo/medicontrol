@@ -1,7 +1,29 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(node fix-controllers.js:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:exam-catalog:*)",
+      "Bash(node -e:*)",
+      "Bash(timeout 60 npm run build:exam-catalog:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(cat:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(pg_isready:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run dev)",
+      "Bash(timeout:*)",
+      "Bash(test:*)",
+      "Bash(psql:*)",
+      "Bash(where:*)",
+      "Bash(docker:*)",
+      "Bash(node scripts/setup-database.js:*)",
+      "Bash(npx tsx:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
