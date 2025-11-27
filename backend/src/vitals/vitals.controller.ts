@@ -6,7 +6,7 @@ import { VitalSignType } from '@prisma/client'
 
 export class VitalsController {
   // GET /api/vitals?patientId=xxx&type=BLOOD_PRESSURE&limit=50
-  async getVitalSigns(req: Request, res: Response, next: NextFunction) {
+  async getVitalSigns(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId, type, limit } = req.query
 
@@ -22,14 +22,14 @@ export class VitalsController {
 
       const vitalSigns = await vitalsService.getVitalSigns(patientId, vitalType, limitNum)
 
-      res.status(200).json({ success: true, data: vitalSigns })
+      return res.status(200).json({ success: true, data: vitalSigns })
     } catch (error) {
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/vitals
-  async createVitalSign(req: Request, res: Response, next: NextFunction) {
+  async createVitalSign(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -39,7 +39,7 @@ export class VitalsController {
       const data = createVitalSignSchema.parse(req.body)
       const vitalSign = await vitalsService.createVitalSign(data, userId)
 
-      res.status(201).json({ success: true, data: vitalSign })
+      return res.status(201).json({ success: true, data: vitalSign })
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
@@ -53,12 +53,12 @@ export class VitalsController {
         return res.status(403).json({ success: false, error: error.message })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/vitals/:id
-  async deleteVitalSign(req: Request, res: Response, next: NextFunction) {
+  async deleteVitalSign(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -68,17 +68,17 @@ export class VitalsController {
       const { id } = req.params
       const result = await vitalsService.deleteVitalSign(id, userId)
 
-      res.status(200).json({ success: true, data: result })
+      return res.status(200).json({ success: true, data: result })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/vitals/stats?patientId=xxx&type=BLOOD_PRESSURE&days=30
-  async getStats(req: Request, res: Response, next: NextFunction) {
+  async getStats(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId, type, days } = req.query
 
@@ -89,7 +89,7 @@ export class VitalsController {
         })
       }
 
-      if (!type || !(type in VitalSignType)) {
+      if (!type || typeof type !== 'string' || !Object.values(VitalSignType).includes(type as any)) {
         return res.status(400).json({
           success: false,
           error: 'type é obrigatório e deve ser um tipo válido',
@@ -99,9 +99,9 @@ export class VitalsController {
       const daysNum = days ? parseInt(days as string) : 30
       const stats = await vitalsService.getStats(patientId, type as VitalSignType, daysNum)
 
-      res.status(200).json({ success: true, data: stats })
+      return res.status(200).json({ success: true, data: stats })
     } catch (error) {
-      next(error)
+      return next(error)
     }
   }
 }

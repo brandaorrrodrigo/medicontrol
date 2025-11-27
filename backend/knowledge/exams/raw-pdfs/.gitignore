@@ -1,0 +1,8 @@
+# Ignorar todos os PDFs (podem ser grandes)
+*.pdf
+
+# Mas manter a pasta no git
+!.gitignore
+
+# README pode ser commitado
+!README.md

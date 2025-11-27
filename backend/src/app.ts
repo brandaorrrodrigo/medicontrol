@@ -17,6 +17,9 @@ import examsRoutes from './exams/exams.routes'
 import photosRoutes from './photos/photos.routes'
 import prescriptionsRoutes from './prescriptions/prescriptions.routes'
 import consultationsRoutes from './consultations/consultations.routes'
+import alertsRoutes from './alerts/alerts.routes'
+import gamificationRoutes from './gamification/gamification.routes'
+import calendarRoutes from './calendar/calendar.routes'
 
 const app: Express = express()
 
@@ -45,7 +48,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 // Health check
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -65,6 +68,9 @@ app.use('/api/exams', examsRoutes)
 app.use('/api/photos', photosRoutes)
 app.use('/api/prescriptions', prescriptionsRoutes)
 app.use('/api/consultations', consultationsRoutes)
+app.use('/api/alerts', alertsRoutes)
+app.use('/api/gamification', gamificationRoutes)
+app.use('/api/calendar', calendarRoutes)
 
 // 404 Handler
 app.use((req: Request, res: Response) => {
@@ -75,7 +81,7 @@ app.use((req: Request, res: Response) => {
 })
 
 // Error Handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Error:', err)
 
   res.status(500).json({

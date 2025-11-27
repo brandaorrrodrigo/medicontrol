@@ -4,7 +4,7 @@ import { PhotoType } from '@prisma/client'
 
 export class PhotosController {
   // GET /api/photos?patientId=xxx&type=BEFORE
-  async getPhotos(req: Request, res: Response, next: NextFunction) {
+  async getPhotos(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId, type } = req.query
 
@@ -18,14 +18,14 @@ export class PhotosController {
       const photoType = type as PhotoType | undefined
       const photos = await photosService.getPhotos(patientId, photoType)
 
-      res.status(200).json({ success: true, data: photos })
+      return res.status(200).json({ success: true, data: photos })
     } catch (error) {
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/photos
-  async uploadPhoto(req: Request, res: Response, next: NextFunction) {
+  async uploadPhoto(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -66,17 +66,17 @@ export class PhotosController {
         userId
       )
 
-      res.status(201).json({ success: true, data: photo })
+      return res.status(201).json({ success: true, data: photo })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(403).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // PUT /api/photos/:id
-  async updatePhoto(req: Request, res: Response, next: NextFunction) {
+  async updatePhoto(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -92,17 +92,17 @@ export class PhotosController {
         userId
       )
 
-      res.status(200).json({ success: true, data: photo })
+      return res.status(200).json({ success: true, data: photo })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/photos/:id
-  async deletePhoto(req: Request, res: Response, next: NextFunction) {
+  async deletePhoto(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -112,17 +112,17 @@ export class PhotosController {
       const { id } = req.params
       const result = await photosService.deletePhoto(id, userId)
 
-      res.status(200).json({ success: true, data: result })
+      return res.status(200).json({ success: true, data: result })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/photos/compare?patientId=xxx&before=xxx&after=xxx
-  async comparePhotos(req: Request, res: Response, next: NextFunction) {
+  async comparePhotos(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId, before, after } = req.query
 
@@ -139,12 +139,12 @@ export class PhotosController {
         after as string
       )
 
-      res.status(200).json({ success: true, data: comparison })
+      return res.status(200).json({ success: true, data: comparison })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 }

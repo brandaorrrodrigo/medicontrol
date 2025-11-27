@@ -33,3 +33,7 @@ Thumbs.db
 # Prisma
 prisma/*.db
 prisma/*.db-journal
+
+# Medical Library
+medlibrary/original_pdfs/*.pdf
+medlibrary/logs/*.log

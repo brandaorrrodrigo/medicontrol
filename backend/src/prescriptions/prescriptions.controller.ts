@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export class PrescriptionsController {
   // GET /api/prescriptions?patientId=xxx
-  async getPrescriptions(req: Request, res: Response, next: NextFunction) {
+  async getPrescriptions(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId } = req.query
 
@@ -18,23 +18,23 @@ export class PrescriptionsController {
 
       const prescriptions = await prescriptionsService.getPrescriptions(patientId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: prescriptions,
       })
     } catch (error) {
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/prescriptions/:id
-  async getPrescriptionById(req: Request, res: Response, next: NextFunction) {
+  async getPrescriptionById(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
 
       const prescription = await prescriptionsService.getPrescriptionById(id)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: prescription,
       })
@@ -45,19 +45,19 @@ export class PrescriptionsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/prescriptions
-  async createPrescription(req: Request, res: Response, next: NextFunction) {
+  async createPrescription(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const validatedData = createPrescriptionSchema.parse(req.body)
       const userId = req.user!.userId
 
       const prescription = await prescriptionsService.createPrescription(validatedData, userId)
 
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         data: prescription,
         message: 'Prescrição criada com sucesso',
@@ -78,12 +78,12 @@ export class PrescriptionsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // PUT /api/prescriptions/:id
-  async updatePrescription(req: Request, res: Response, next: NextFunction) {
+  async updatePrescription(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
       const validatedData = updatePrescriptionSchema.parse(req.body)
@@ -91,7 +91,7 @@ export class PrescriptionsController {
 
       const prescription = await prescriptionsService.updatePrescription(id, validatedData, userId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: prescription,
         message: 'Prescrição atualizada com sucesso',
@@ -115,12 +115,12 @@ export class PrescriptionsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/prescriptions/:id/items
-  async addItem(req: Request, res: Response, next: NextFunction) {
+  async addItem(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
       const validatedData = addItemSchema.parse(req.body)
@@ -128,7 +128,7 @@ export class PrescriptionsController {
 
       const item = await prescriptionsService.addItem(id, validatedData, userId)
 
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         data: item,
         message: 'Item adicionado à prescrição',
@@ -152,19 +152,19 @@ export class PrescriptionsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/prescriptions/items/:itemId
-  async removeItem(req: Request, res: Response, next: NextFunction) {
+  async removeItem(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { itemId } = req.params
       const userId = req.user!.userId
 
       await prescriptionsService.removeItem(itemId, userId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Item removido da prescrição',
       })
@@ -181,19 +181,19 @@ export class PrescriptionsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/prescriptions/:id
-  async deletePrescription(req: Request, res: Response, next: NextFunction) {
+  async deletePrescription(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
       const userId = req.user!.userId
 
       await prescriptionsService.deletePrescription(id, userId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Prescrição deletada com sucesso',
       })
@@ -210,7 +210,7 @@ export class PrescriptionsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 }

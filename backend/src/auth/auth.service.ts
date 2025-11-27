@@ -294,7 +294,7 @@ export class AuthService {
 
   private generateAccessToken(userId: string, email: string, role: UserRole): string {
     const payload: TokenPayload = { userId, email, role }
-    return jwt.sign(payload, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN })
+    return jwt.sign(payload, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN } as jwt.SignOptions)
   }
 
   private generateRefreshToken(): string {

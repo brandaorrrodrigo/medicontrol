@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import { env } from '../config/env'
 
 // Criar transporter do nodemailer
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   host: env.SMTP_HOST || 'smtp.gmail.com',
   port: Number(env.SMTP_PORT) || 587,
   secure: false, // true para 465, false para outras portas
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransporter({
 })
 
 // Verificar configuração do transporter
-transporter.verify((error, success) => {
+transporter.verify((error, _success) => {
   if (error) {
     console.error('Erro na configuração do email:', error)
   } else {

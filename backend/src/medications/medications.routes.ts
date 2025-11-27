@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { medicationsController } from './medications.controller'
 import { medicationPhotosController } from '../medication-photos/medication-photos.controller'
+import * as stockController from '../alerts/stock.controller'
 import { authenticate } from '../auth/auth.middleware'
 import { uploadPhoto } from '../common/upload.config'
 
@@ -14,19 +15,19 @@ router.use(authenticate)
 // ============================================================================
 
 // GET /api/medications?patientId=xxx&active=true
-router.get('/', (req, res, next) => medicationsController.getMedications(req, res, next))
+router.get('/', (req, res, _next) => medicationsController.getMedications(req, res, _next))
 
 // GET /api/medications/:id
-router.get('/:id', (req, res, next) => medicationsController.getMedicationById(req, res, next))
+router.get('/:id', (req, res, _next) => medicationsController.getMedicationById(req, res, _next))
 
 // POST /api/medications
-router.post('/', (req, res, next) => medicationsController.createMedication(req, res, next))
+router.post('/', (req, res, _next) => medicationsController.createMedication(req, res, _next))
 
 // PUT /api/medications/:id
-router.put('/:id', (req, res, next) => medicationsController.updateMedication(req, res, next))
+router.put('/:id', (req, res, _next) => medicationsController.updateMedication(req, res, _next))
 
 // DELETE /api/medications/:id
-router.delete('/:id', (req, res, next) => medicationsController.deleteMedication(req, res, next))
+router.delete('/:id', (req, res, _next) => medicationsController.deleteMedication(req, res, _next))
 
 // ============================================================================
 // MEDICATION PHOTOS ROUTES
@@ -55,6 +56,40 @@ router.get('/:medicationId/photos', (req, res, next) =>
 // POST /api/medications/:medicationId/photos - Upload de foto
 router.post('/:medicationId/photos', uploadPhoto.single('photo'), (req, res, next) =>
   medicationPhotosController.uploadMedicationPhoto(req, res, next)
+)
+
+// ============================================================================
+// STOCK MANAGEMENT ROUTES
+// ============================================================================
+
+// GET /api/medications/:medicationId/stock
+router.get('/:medicationId/stock', (req, res, _next) =>
+  stockController.getStock(req, res)
+)
+
+// POST /api/medications/:medicationId/stock
+router.post('/:medicationId/stock', (req, res, _next) =>
+  stockController.createStock(req, res)
+)
+
+// PUT /api/medications/:medicationId/stock
+router.put('/:medicationId/stock', (req, res, _next) =>
+  stockController.updateStock(req, res)
+)
+
+// DELETE /api/medications/:medicationId/stock
+router.delete('/:medicationId/stock', (req, res, _next) =>
+  stockController.deleteStock(req, res)
+)
+
+// POST /api/medications/:medicationId/stock/consume
+router.post('/:medicationId/stock/consume', (req, res, _next) =>
+  stockController.consumeStock(req, res)
+)
+
+// POST /api/medications/:medicationId/stock/restock
+router.post('/:medicationId/stock/restock', (req, res, _next) =>
+  stockController.restockMedication(req, res)
 )
 
 export default router

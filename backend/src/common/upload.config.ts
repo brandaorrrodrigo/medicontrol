@@ -5,10 +5,10 @@ import { env } from '../config/env'
 
 // Configuração de storage
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (_req, _file, cb) => {
     cb(null, env.UPLOAD_DIR)
   },
-  filename: (req, file, cb) => {
+  filename: (_req, file, cb) => {
     const uniqueSuffix = crypto.randomBytes(16).toString('hex')
     const ext = path.extname(file.originalname)
     const filename = `${uniqueSuffix}${ext}`
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 })
 
 // Filtro de tipos de arquivo
-const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+const fileFilter = (_req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
   // Tipos permitidos para exames
   const examMimeTypes = [
     'application/pdf',
@@ -35,7 +35,7 @@ const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCa
 }
 
 // Filtro apenas para imagens
-const imageFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+const imageFilter = (_req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
   const imageMimeTypes = [
     'image/jpeg',
     'image/jpg',

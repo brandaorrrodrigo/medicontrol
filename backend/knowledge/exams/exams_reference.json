@@ -1,0 +1,2882 @@
+[
+  {
+    "markerCode": "ACIDO_FOLICO",
+    "markerName": "HOMOCISTEÍNA     Cromatografia/Imunoensaio     Risco: Trombose venosa, cardiovascular.     Reduzem níveis de vit. B12 e B6, ácido fólico.     VR     3,8 – 18,6    mol/L – homens     0,2 – 20,1    mol/L - mulheres",
+    "synonyms": [
+      "folato",
+      "vitamina b9"
+    ],
+    "category": "Vitaminas",
+    "unit": "ng/mL",
+    "referenceRanges": [],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "ACIDO_URICO",
+    "markerName": "118 Os cristais com relevância clínica são: • Cristais   de   cistina   –   Indicam   uma   doença   chamada cistinúria. • Cristais de magnésio-amônio-fosfato (chamado de cristais de estruvita ou cristais de fosfato triplo) – podem ser normais, mas também podem estar presentes em casos de urina muito alcalina provocada por infecção urinária pelas bactérias Proteus ou Klebsiella. Pacientes com cálculo renal por pedras de estruvita costumam ter esses cristais na urina. • Cristais de tirosina – Presentes em uma doença chamada tirosinemia. • Cristais de bilirrubina – Costumam indicar doença do fígado. • Cristais de colesterol – Costuma ser um sinal de perdas maciças de proteína na urina (síndrome nefrótica). A presença de cristais de ácido úrico, caso em grande quantidade, também deve ser valorizada, pois podem surgir em pacientes com gota ou neoplasias, como linfoma ou",
+    "synonyms": [
+      "uricemia",
+      "acido urico serico"
+    ],
+    "category": "Função Renal",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3.5,
+        "high": 7.2
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "ALBUMINA",
+    "markerName": "PARAMETROS BIOQUÍMICOS PARA  PROTEÍNAS VICERAIS  TRANSFERRINA   PROTEÍNA TRANSPORTADORA  RETINOL (RBP)  ALBUMINA   PRÉ-ALBUMINA",
+    "synonyms": [
+      "albumina serica"
+    ],
+    "category": "Função Hepática",
+    "unit": "g/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0,
+        "high": 5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 6,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3,
+        "high": 4
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 22,
+        "high": 25
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 15,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 200
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4,
+        "high": 6
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0.03,
+        "high": 0.04
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "581390049-ARTMED-EBOOK-INTERPRETACAO-DE-EXAMES-HEPATICOS-2.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "ALT_TGP",
+    "markerName": "Dosagem de ALT/ TGP     Interpretação :     Valores   de   referência :     Homens :   até   41   U/L ;     Mulheres :   até   32   U/L ;     Crianças :   de   25   a   95   U/L ;     Recém   nascidos :   de   40   a   120   U/L ;     Valores   críticos :     Não   aplicável .",
+    "synonyms": [
+      "alt",
+      "alanina aminotransferase",
+      "transaminase piruvica"
+    ],
+    "category": "Função Hepática",
+    "unit": "U/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 25,
+        "high": 95
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3,
+        "high": 4
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "AST_TGO",
+    "markerName": "ENZIMAS  DOENÇA HEPÁTICA  NÍVEIS SÉRICOS DE ENZIMAS CITOSSÓLICAS,  MITOCONDRIAIS E ASSOCIADAS À MEMBRANA  - ALANINA AMINOTRANFERASES (ALT -TGP)  -   ASPARTATO AMINOTRANSFERASE (AST – TGO)  -   FOSFATASE ALCALINA (FAL)  -   δ -GLUTAMILTRANSFERASE (GGT)",
+    "synonyms": [
+      "ast",
+      "aspartato aminotransferase",
+      "transaminase oxalacetica"
+    ],
+    "category": "Função Hepática",
+    "unit": "U/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 25,
+        "high": 95
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 15,
+        "high": 60
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 50
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 15
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          3,
+          4
+        ]
+      },
+      {
+        "pdf": "581390049-ARTMED-EBOOK-INTERPRETACAO-DE-EXAMES-HEPATICOS-2.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "BILIRRUBINA_DIRETA",
+    "markerName": "Dosagem de bilirrubinas     Principais interferentes na fase pré - analítica:     Aumento da bilirrubina direta:     Doenças hepáticas hereditárias (Dubin - Johnson, Rotor);     Lesão de hepatócitos (viral, tóxica, medicamentosa, alcoólica);     Ostrução biliar (litíase, neoplasias).",
+    "synonyms": [
+      "bilirrubina conjugada"
+    ],
+    "category": "Função Hepática",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0.1,
+        "high": 1
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "BILIRRUBINA_INDIRETA",
+    "markerName": "Dosagem de bilirrubinas     Principais interferentes na fase pré - analítica:     Aumento da bilirrubina indireta:     Anemias hemolíticas;     Hemólise autoimune;     Transfusão de sangue;     Reabsorção de hematomas;     Eritropoiese ineficaz;     Doenças hereditárias (Gilbert, Crigler - Najar).      ",
+    "synonyms": [
+      "bilirrubina nao conjugada"
+    ],
+    "category": "Função Hepática",
+    "unit": "mg/dL",
+    "referenceRanges": [],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "BILIRRUBINA_TOTAL",
+    "markerName": "Dosagem de bilirrubinas     Interpretação :     Valores   de   referência   para   adultos :     Bilirrubina   direta   -   até   0 , 4   mg/dL ;     Bilirrubina   indireta   -   de   0 , 6   a   0 , 9   mg/dL ;     Bilirrubina   total   –   até   1 , 3   mg/dL .",
+    "synonyms": [
+      "bilirrubinas totais"
+    ],
+    "category": "Função Hepática",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 6,
+        "high": 0
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "581390049-ARTMED-EBOOK-INTERPRETACAO-DE-EXAMES-HEPATICOS-2.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "CALCIO",
+    "markerName": "Dosagem de cálcio   -   Calcemia     O que é o cálcio?     O   cálcio   participa   da   contratilidade   cardíaca   e   da   musculatura   esquelética   e   é  essencial   para   o   funcionamento   do   sistema   nervoso .   Além   disso,   ele   tem   uma  importante   função   na   coagulação   sanguínea   e   na   mineralização   óssea .     Cerca   de   40 %   do   cálcio   encontra - se   ligado   às   proteínas,   10 %   está   na   forma   de  complexo   inorgânico   e   50 %   está   presente   como   cálcio   iônico   (livre) .     Indicação   clínica :     A   avaliação   do   cálcio   sérico   está   indicada   em   todos   os   pacientes   com  distúrbios     metabólicos,   em   casos   de   manifestações   neuromusculares,   osteopenia   e  osteoporose,     investigação   de   litíase   urinária,   monitorização   em   pacientes   com   insuficiência  renal,     pancreatite   aguda,   controle   de   neoplasias   (risco   de   síndrome   de   lise   tumoral) ;     Também   é   empregada   para   avaliar   a   função   da   paratireóide,   uma   vez     que   o   cálcio   sérico   é   mantido   dentro   dos   limites   fisiológicos   pela   ação  combinada   do",
+    "synonyms": [
+      "ca",
+      "calcio serico",
+      "calcio ionico"
+    ],
+    "category": "Eletrólitos",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 10
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "COLESTEROL_TOTAL",
+    "markerName": "AVALIAÇÃO LIPÍDICA  FRAÇÕES  TRIACILGLICEROIS   COLESTEROL TOTAL E  FRAÇÕES",
+    "synonyms": [
+      "colesterol"
+    ],
+    "category": "Lipidograma",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 25,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "CREATININA",
+    "markerName": "Exames para avaliação de função  renal  Creatinina  Clearance de Creatinina  Dosagem de Uréia",
+    "synonyms": [
+      "creatinina serica"
+    ],
+    "category": "Função Renal",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 70,
+        "high": 130
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 19
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0.4,
+        "high": 1.3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 200
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 50,
+        "high": 60
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 90,
+        "high": 130
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 70,
+        "high": 140
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "430073723-Interpretacao-Dos-Exames-Laboratoriais-para-nutricao.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "pdf": "581390049-ARTMED-EBOOK-INTERPRETACAO-DE-EXAMES-HEPATICOS-2.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "ERITROCITOS",
+    "markerName": "Hemograma     Divisão :     Eritrograma :   estuda   as   alterações   nos   eritrócitos,   Hb,   Ht   e   morfologia   eritrocitária ;     Leucograma :   estuda   a   contagem   total   dos   leucócitos,   assim   como   as   fórmulas  percentuais   e   absolutas   e   o   estudos   da   sua   morfologia ;     Plaquetograma :   estimativa   do   numero   de   plaquetas   e   de   sua   morfologia .     Termos   usados :     - citose   ou   - filia :   aumento ;     - penia :   redução .",
+    "synonyms": [
+      "hemacias",
+      "globulos vermelhos",
+      "red blood cells"
+    ],
+    "category": "Hemograma",
+    "unit": "milhões/mm³",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5.5,
+        "high": 7
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 110,
+        "high": 120
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 15
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3,
+        "high": 4
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "FERRITINA",
+    "markerName": "TRANSAMINASES – CAUSAS NÃO-HEPÁTICAS     Hemocromatose.     Os primeiros exames a serem realizados são a dosagem de ferro e da ferritina séricos e a determinação da suturação da  transferrina Em geral, o ferro sérico está aumentado, comumente entre 180-300 mcg por cento o Índice de saturação de mais de  45% é sugestivo de hemocromatose.     Moléstia de Wilson     Essa é um doença genética que se caracteriza por diminuição da excreção biliar de cobre, que se acumula em diversos tecidos,  especialmente no fígado, cérebro, córneas e rins.     Deficiência de Alfa-1-glicoproteínas:     A deficiência desta glicoproteína é causa comum de doença hepática crônica em adultos.",
+    "synonyms": [
+      "ferritina serica"
+    ],
+    "category": "Inflamatórios",
+    "unit": "ng/mL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 180,
+        "high": 300
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "FOSFATASE_ALCALINA",
+    "markerName": "Exames para avaliação de função  hepática e biliar  Dosagem de Alanina Aminotransferase  Dosagem de Aspartato Aminotransferase  Dosagem de Gama Glutamil Transferase  Dosagem de Albumina  Dosagem de Fosfatase Alcalina  Dosagem de Bilirrubinas  Dosagem de Proteínas Totais",
+    "synonyms": [
+      "fa",
+      "alkaline phosphatase"
+    ],
+    "category": "Função Hepática",
+    "unit": "U/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 25
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 6
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 30,
+        "high": 60
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "581390049-ARTMED-EBOOK-INTERPRETACAO-DE-EXAMES-HEPATICOS-2.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "GAMA_GT",
+    "markerName": "Dosagem de Gama Glutamil  Transferase   -   GGT     O que é a Gama Glutamil Transferase?     A   gama   glutamil   tranferase   (gama   GT)   é   uma   enzima   fabricada   naturalmente  pelo   organismo   no   fígado   (incluindo   nos   ductos   biliares)   e   encontrada   tanto   no  fígado   quanto   em   outros   órgãos   como   rins   e   intestino .     Indicação clínica:     É   um   marcador   sensível   de   colestase   hepatobiliar   e   do   consumo   de     álcool ;     Uma   das   aplicações   clínicas   para   sua   determinação   é   o   acompanhamento   de  pacientes   alcoólatras   que   estão   em   programa   de   recuperação .",
+    "synonyms": [
+      "ggt",
+      "gamaglutamiltransferase",
+      "gamma gt"
+    ],
+    "category": "Função Hepática",
+    "unit": "U/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 50
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 30
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "GLICEMIA_JEJUM",
+    "markerName": "FORMAS DE ACESSAR OS INDICADORES  BIOQUÍMICOS  Sangue   Urina   Fezes  SÉRIE VERMELHA  SÉRIE BRANCA  PROTEÍNAS  LIPÍDIOS  GLICOSE  HORMÔNIOS  ÁGUA  METABÓLITOS  PROTEÍNAS  CARBOIDRATO  PARASITAS  GORDURAS  BACTÉRIAS",
+    "synonyms": [
+      "glicose em jejum",
+      "glicemia de jejum",
+      "glicose plasmatica",
+      "glicose sanguinea"
+    ],
+    "category": "Glicemia",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 60,
+        "high": 99
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 12,
+        "high": 14
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 100
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 45
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 25,
+        "high": 125
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 8,
+        "high": 12
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4,
+        "high": 6
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 12,
+        "high": 24
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 200,
+        "high": 300
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 50
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0.5,
+        "high": 3.5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0,
+        "high": 2
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 24
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 190
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 70,
+        "high": 80
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 80,
+        "high": 100
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 285,
+        "high": 295
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 100,
+        "high": 125
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 70,
+        "high": 120
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 200,
+        "high": 280
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 7.5,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3,
+        "high": 5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 160,
+        "high": 180
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2019,
+        "high": 2020
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 90,
+        "high": 120
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "HDL_COLESTEROL",
+    "markerName": "AVALIAÇÃO LIPÍDICA  Valores de referência  Consenso Brasileiro de Dislipidemias.  INDICE DE CASTELLI II  LDL-c/HDL–c: até 3,3  IC =   130 LDL  40 HDL  IC = 3,25  IC = 180 LDL  45 HDL  ICA = 4",
+    "synonyms": [
+      "hdl colesterol",
+      "colesterol hdl",
+      "hdl-c"
+    ],
+    "category": "Lipidograma",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 35
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 12,
+        "high": 24
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 25,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1,
+        "high": 48
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 130,
+        "high": 159
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 160
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 10
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "HEMATOCRITO",
+    "markerName": "Eritrograma - Hematócrito  Hematócrito ou Volume Globular (%)  O hematócrito (ou volume globular) é a percentagem de eritrócitos no  sangue. É um dos exames mais úteis no estudo da série vermelha e com ele podemos obter inúmeras informações como: a coloração do plasma, a capa  leucocitária, microfilárias e Tripanossoma spp.  O   plasma normal é límpido e incolor   (caninos e felinos) ou ligeiramente amarelado nos eqüinos e bovinos, devido ao caroteno e à xantofila presentes na alimentação dos herbívoros.  Plasma ictérico é amarelo e límpido; plasma hemoglobinêmico é límpido, variando de rosa a vermelho; plasma lipêmico é esbranquiçado e turvo.",
+    "synonyms": [
+      "ht",
+      "htc"
+    ],
+    "category": "Hemograma",
+    "unit": "%",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 8,
+        "high": 10
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 20
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "HEMOGLOBINA",
+    "markerName": "PARAMETROS SANGUÍNEO AVALIADOS  - Hemoglobina (Hb)  - Hematócrito (Ht)  - Capacidade de ligação do ferro total  (TIBC)  - Ferro sérico (Fe)  Ferritina  VCM  HCM",
+    "synonyms": [
+      "hb",
+      "hemoglobina sanguinea"
+    ],
+    "category": "Hemograma",
+    "unit": "mg/dl",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 6,
+        "high": 0
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 76,
+        "high": 96
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5.3,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 6,
+        "high": 7
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 12
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 80
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 27
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3,
+        "high": 5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 140,
+        "high": 380
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 4
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0,
+        "high": 2
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0,
+        "high": 1.5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 110,
+        "high": 120
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 20
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4,
+        "high": 11
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1,
+        "high": 2
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "HEMOGLOBINA_GLICADA",
+    "markerName": "HEMOGLOBINA GLICADA (Hb A1C)  Mas existem tantas proteínas plasmáticas,  porque então dosar a glicação da  hemoglobina???  APOPTOSE DA HEMOGLOBINA É DE 120 DIAS  HB A1C FORNECE A AVALIAÇÃO DO  CONTROLE GLICÊMICO DOS ÚLTIMOS  90 DIAS ANTES DO EXAME",
+    "synonyms": [
+      "hba1c",
+      "hemoglobina glicosilada",
+      "a1c"
+    ],
+    "category": "Glicemia",
+    "unit": "%",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4,
+        "high": 6
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "INSULINA",
+    "markerName": "Dosagem de potássio     Principais interferentes na fase pré - analítica:     Aumento   –   hiperpotassemia   ou   hipercalemia :     Icterícia ;     Trombocitose ;     Leucocitose ;     Hiperproteinemia ;     Biológicos :   idade,   gravidez,   exercícios .   Vigorosos ;     Drogas :   laxantes,   diuréticos   (espironolactona   e   amilorida),   heparina ;     Suplementação   terapêutica ;     Redistribuição   da   célula   para   o   extracelular   (hemólise,   trauma,   jejum   prolongado,  status   epilepticus,   hipertermia   maligna,   acidoses   e   desidratação) ;     Redução   da   excreção   (insufciência   renal   aguda,   doença   Addison,   hipofunção   do  sistema   renina - angiotensina - aldosterona,   após   exercício   extremo,   choque) .     Falta   de   insulina ;     Drogas   em   pacientes   com   risco   de   disfunção   renal   (sulfametoxazol   e   trimetoprima,     antiinflamatórios   não   hormonais,   inibidores   de   ECA) .",
+    "synonyms": [
+      "insulina basal",
+      "insulina em jejum"
+    ],
+    "category": "Glicemia",
+    "unit": "μU/mL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3.4,
+        "high": 7
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 60
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 45
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 3.5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 0
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 70,
+        "high": 80
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 110,
+        "high": 120
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 40
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 200,
+        "high": 280
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2.5,
+        "high": 25
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 73,
+        "high": 76
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 85,
+        "high": 7541
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "430073723-Interpretacao-Dos-Exames-Laboratoriais-para-nutricao.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "LDL_COLESTEROL",
+    "markerName": "Triglic Triglic é é rides rides  • •   A determina A determina ç ç ão de triglic ão de triglic é é rides rides   é é   significativa no significativa no  reconhecimento e tratamento das reconhecimento e tratamento das  hiperlipoproteinemias; hiperlipoproteinemias;  • •   Constituem as principais fra Constituem as principais fra ç ç ões dos quilom ões dos quilom í í crons, crons,  das VLDL   e pequena parte das IDL presentes no das VLDL   e pequena parte das IDL presentes no  plasma sangu plasma sangu í í neo; neo;  \u0001 \u0001   VR: VR:   <150 mg/dL <150 mg/dL   ó ó timo; timo;  150 150 - - 200 mg/dL lim 200 mg/dL lim í í trofe; trofe;  200 200 - - 499 mg/dL alto; 499 mg/dL alto;  ≥ ≥ 500 mg/dL muito alto. 500 mg/dL muito alto.",
+    "synonyms": [
+      "ldl colesterol",
+      "colesterol ldl",
+      "ldl-c"
+    ],
+    "category": "Lipidograma",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 150
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 200
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 100
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 24
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 200,
+        "high": 239
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 150,
+        "high": 200
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "LEUCOCITOS",
+    "markerName": "LEUCOGRAMA   %   ABSOLUTO mm3  LEUCÓCITOS  TOTAIS  -   4.500 – 10.000  Neutrófilos   51 a 65   2295 a 6500  Eosinófilos   1 a 4   45 a 400  Basófilos   0 a 1   0 a 100  Linfócitos   20 a 33   900 a 3300  Monócitos   2 a 8   90 a 800",
+    "synonyms": [
+      "globulos brancos",
+      "white blood cells",
+      "wbc"
+    ],
+    "category": "Hemograma",
+    "unit": "/mm³",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 51,
+        "high": 65
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 50
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4,
+        "high": 11
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 14,
+        "high": 18
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3600,
+        "high": 11000
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 4
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 46,
+        "high": 63
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 3
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 20,
+        "high": 30
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 24,
+        "high": 48
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 15,
+        "high": 45
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1,
+        "high": 5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0,
+        "high": 2
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "MAGNESIO",
+    "markerName": "Dosagem de magnésio   -   Magnesemia     O que é o magnésio?     É   um   dos   principais   cátions   inorgânicos,   com   concentração   maior   intracelular  que   extracelular,   sendo   cofator   de   diversas   reações   enzimáticas .     Indicação clínica:     Exame útil na avaliação de distúrbios metabólicos.  ",
+    "synonyms": [
+      "mg",
+      "magnesio serico"
+    ],
+    "category": "Eletrólitos",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 1
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "PLAQUETAS",
+    "markerName": "Hemograma   -   Plaquetograma     Por   outro   lado   o   aumento   do   número   de   plaquetas   acima   de   450 . 000   é  denominado   de   plaquetose ;     Plaquetoses   até   700 . 000   podem   ocorrer   notadamente   na   anemia  ferropriva,   hemorragias   agudas,   inflamações   e   infecções   crônicas,  anemias   hemolíticas,   leucemias   e   policitemia   vera .     Entretanto   há   situações   em   que   a   contagem   de   plaquetas   é   superior   a  700 . 000 ,   podendo   chegar   até   3 . 000 . 000   ,   como   é   o   caso   da   trombocitemia  essencial   –   doença   mieloproliferativa   que   desencadeia   a   formação  descontrolada   das   células   precursoras   das   plaquetas,   os   megacariócitos .",
+    "synonyms": [
+      "plaquetas sanguineas",
+      "platelets"
+    ],
+    "category": "Hemograma",
+    "unit": "/mm³",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 8,
+        "high": 10
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 4,
+        "high": 11
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 3,
+        "high": 7
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 140,
+        "high": 380
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 150,
+        "high": 450
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0.4,
+        "high": 4
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "POTASSIO",
+    "markerName": "EAS (Elementos Anormais e Sedimento).  FASE 2: ANÁLISE BIOQUÍMICA  Determina a presença ou ausência de algumas substâncias  químicas na urina.  * pH:   Valores baixos indicam perda de potássio, dieta rica em  proteínas, infecção das vias urinárias por Escherichia coli,  diarréias   severas.   O   uso   de   anestésicos,   assim   como  medicamentos podem diminuir o pH urinário.  * DENSIDADE:   avalia a capacidade do rim de concentrar a  urina. Densidade baixa indica uso excessivo de líquidos por  via   intravenosa,   insuficiência   renal   crônica,   hipotermia,  aumento da pressão intracraniana, diabetes e hipertensão.  Densidade alta mostra desidratação,   diarréia , vômitos, febre,  diabetes   mellitus,   glomerulonefrite ,   insuficiência   cardíaca  congestiva, etc.",
+    "synonyms": [
+      "k",
+      "potassio serico"
+    ],
+    "category": "Eletrólitos",
+    "unit": "mEq/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 5
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 22,
+        "high": 25
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 96,
+        "high": 108
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 7.5,
+        "high": 10
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 7.5,
+        "high": 8
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "239092064-Exames-Laboratoriais-Pelo-Nutricionista-Felipe-Fedrizzi.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "PROTEINA_C_REATIVA",
+    "markerName": "Interpretação de Exames em Bioquímica Clínica   –   Por Giovani Lavieri  www.farmaceuticando.com  7.   Marcadores cardíacos  Os marcadores cardíacos são fundamentais para diagnosticar um  infarto agudo do m iocárdio e acompanhar o paciente infartado. Dentre  esses marcadores, podemos citar a CKMB, as troponinas, a mioglobina  e a PCR ultrassensível.  O   infarto   é   uma   das   principais   causas   de   óbito   no   mundo,  predominantemente em pessoas com mais de 40 anos de idad e. Pode  ser   causado,   por   exemplo,   pelo   entupimento   de   alguma   artéria  coronária. Quando o tecido cardíaco é lesionado, algumas substâncias  são liberadas na corrente sanguínea (umas mais cedo, outras mais  tardiamente) e identificadas através das dosagens bio químicas, com  métodos qualitativos ou quantitativos.  As enzimas AST e L DH (desidrogenase láctica) eram muito usadas  por terem um   baixo custo. Porém, são pouco específicas e não são os  exames   de   escolha   para   esses   casos.   O   ideal   é   utilizar   um   dos  marcadores   citados anteriormente, já que são bem mais específicos e  sensíveis.  Esses marcadores ajudam a entender a extensão da lesão e  alguns   também auxiliam no diagnóstico de reinfarto.  Licensed to Mariana Ferreira da Cunha Silva - mfcsilva20@gmail.com - 061.376.835-32 - HP150916312210154",
+    "synonyms": [
+      "proteina c reativa",
+      "c reactive protein",
+      "crp"
+    ],
+    "category": "Inflamatórios",
+    "unit": "U/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "SODIO",
+    "markerName": "Dosagem de íons no sangue  Dosagem de Potássio  Dosagem de Sódio  Dosagem de Cálcio  Dosagem de Magnésio",
+    "synonyms": [
+      "na",
+      "sodio serico"
+    ],
+    "category": "Eletrólitos",
+    "unit": "mEq/L",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 135,
+        "high": 145
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1,
+        "high": 2
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5.5,
+        "high": 7
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 135
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 96,
+        "high": 108
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 5,
+        "high": 10
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 100,
+        "high": 125
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          3
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "TRIGLICERIDEOS",
+    "markerName": "4  que a proteína C reativa (PCR) pode ser  usada para predizer um futuro evento  cardiovascular.   Concentrações  aumentadas de PCR precedem em anos,  antecipando   o   primeiro   evento  coronariano ou cerebral em indivíduos de  alto risco.  T3 livre   2,3 a 4,2 pg/ml   Valores aumentados:   hipertireoidismo,  tireoidite sub aguda avançada.   Valores  diminuídos: hipotireoidismo primário e  hipotireoidismo secundário   .  T4 livre   0,76 a 1,76   ng/dL   O T4 livre corresponde a 0,02 - 0,04% do  T4 total, estando precocemente elevado  nas   fases   iniciais   do   hipertireoidismo,  quando os níveis de T4 e T3 totais estão  ainda dentro dos limites de normalidade.  Valores aumentados: hipe rtireoidismo.  Valores diminuídos: hipotireoidismo.  TGO   Até 39 ,0 U/L   Valores   diminuídos:   azotemia,   diálise  renal crônica, estados de deficiência de  piridoxal   fosfato   (ex.   desnutrição,  gravidez, doença hepática alcoólica).  Valores   normais:   angina   pectoris,  insuficiência coronariana, pericardite.  TGP   Homens:  Até 45 ,0 U/L  Mulheres:  Até 31,0 U/L  Valores   aumentados:   necrose   celular  hepática   de   qualquer   causa,   choque  severo,   insuficiência   cardíaca,   anóxia  aguda   (ex:   estado   asmático),   trauma  extenso,   hepatit e   infecciosa   e   tóxica,  icterícia   obstrutiva,   obstrução   biliar,  cirrose,   carcinoma   hepático,   miosite,  miocardite, distrofia muscular, doenças  hemolíticas, trauma muscular moderado,  abuso   crônico   do   álcool,   filariose,  queimaduras severas, pancreatite severa.  Valores   diminuídos:   azotemia,   diálise  renal crônica, estados de deficiência de  piridoxal fosfato.  Triglicerídeos   02 a 9 anos: até 100,0 mg/dL  10 a 19 anos: até 130,0 mg/dL  > 19 anos  Ótimo: < 150,0 mg/dL  Limítrofe: 150,0 a 199,0 mg/dL  Alto: 200,0 a 499,0   mg/dL  Muito Alto: > 499,0 mg/dL  Valores   aumentados:   dislipidemias,  doenças   hepáticas,   xantomas,  pancreatites,   síndrome   nefrótica,  doenças de estocagem, hipotireoidismo,  diabetes   mellitus,   alcoolismo,   gota,  gravidez, doenças agudas, uso de certos  medicamen tos   (contraceptivos   orais,",
+    "synonyms": [
+      "triglicerides",
+      "tg"
+    ],
+    "category": "Lipidograma",
+    "unit": "pg/ml",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2.3,
+        "high": 4.2
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 100
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "430073723-Interpretacao-Dos-Exames-Laboratoriais-para-nutricao.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "581390049-ARTMED-EBOOK-INTERPRETACAO-DE-EXAMES-HEPATICOS-2.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "TSH",
+    "markerName": "5  estrogênios   em   altas   dosagens,  betabloqueadores,   hidroclorotiazida,  esteróides   anabolizantes,  corticosteróides).   Certos   valores   estão  associados a algumas condições (até 250,  não   associado   a   nenhum   estado  patológico; 250 - 500, ass ociado à doença  vascular   periférica;   superior   a   500,  associado   a   risco   de   pancreatites;  superior   a   1000,   associado   a  hiperlipidemias, especialmente tipo I e V,  risco de pancreatites; superior a 5000,  associado   a   xantoma   eruptivo,   arco  corneal,   lipemia   reti nal   e  hepatoesplenomegalia).  Valores   diminuídos:  abetalipoproteinemias,   desnutrição,  alteração em hábitos dietéticos recentes  (especialmente regimes), perda de peso  recente,   exercício   vigoroso   e   uso   de  medicamentos   (bloqueadores   de  receptores alfa - 1).  Hipe rtrigliceridemia está associada com o  uso   de   diuréticos   (tiazidicos)   e   beta  adrenérgicos.  TSH   1ª   semana   de   vida:   até   25,000  uUI/mL  2ªsemana a 11 meses: 0,800 a 6,300  uUI/mL  1 a 5 anos: 0,700 a 6,000 uUI/mL  6 a 10 anos: 0,600 a 5,400 uUI/mL  11 a 15 anos: 0,500 a 4,900 uUI/mL  Adultos: 0, 400   a 5, 600   uUI/mL  Limite de detecção: 0,008 uUI/ml  P ode ser considerado o melhor exame  isolado   para   a   investigação   de  hipotireoidismo   e   hipertireoidismo.   Na  maioria   dos   pacientes   com  hipotireoidismo   primário, os resultados  de TSH são marcadamente elevados (3 a  100 vezes o normal).  Os resultados de um ensaio sensível para  TSH que estão dentro dos intervalos de  referência   excluem   a   disfunção  tireoidiana. No hipotireoidismo subclínico  o TSH está elevado;   o T4 livre, o T4 total e  o T3 podem apresentar níveis normais.  Nas mulheres com mais de 50 anos de  idade a prevalência de hipotireoidismo  subclínico é de 15   -   20%.  Variáveis   fisiológicas   que   alteram   os  níveis   de   TSH:   gravidez,   idade,   ritmo  circadiano.   Em   alguns   momentos   na  gravidez, o   HCG   compete   com   o   TSH",
+    "synonyms": [
+      "hormonio tireoestimulante",
+      "tireotrofina"
+    ],
+    "category": "Função Tireoidiana",
+    "unit": "mg/dl",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 250,
+        "high": 500
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1,
+        "high": 2
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 305,
+        "high": 16
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 0.4,
+        "high": 4
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "430073723-Interpretacao-Dos-Exames-Laboratoriais-para-nutricao.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "UREIA",
+    "markerName": "Dosagem de uréia     Principais interferentes na fase pré - analítica:     Aumento:     Insuficiência cardíaca congestiva;     Diuréticos;     Cetoacidose;     Choque;     Uso de corticosteroides;     Sangramento gastrintestinal;     Após uso de drogas nefrotóxicas;     Hemólise;     Hiperbilirrubinemia;     Alta ingesta proteica;     Desidratação;     Jejum prolongado;     Aumento do catabolismo proteico.",
+    "synonyms": [
+      "ureia serica"
+    ],
+    "category": "Função Renal",
+    "unit": "mg/dL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 50
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 25,
+        "high": 40
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 10,
+        "high": 45
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "393016264-Exames-laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "430073723-Interpretacao-Dos-Exames-Laboratoriais-para-nutricao.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "529479706-Interpretac-a-o-de-exames-laboratoriais-CEUB-101.pdf",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "pdf": "719381010-Interpretacao-de-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "VCM",
+    "markerName": "62 UNIDADE II   │   EXAMES LABORATORIAIS IMUNOLÓGICOS  após 15 dias, onde a elevação do título de pelo menos duas vezes sugere o diagnóstico  (SBPC/ML, 2014).  Mononucleose  A infecção pelo vírus Epstein-Barr (EBV) é extremamente comum. Nos adolescentes e adultos jovens, a infecção primária é caracterizada pelo quadro de mononucleose infecciosa. É transmitido pela saliva contaminada em um contato íntimo entre as pessoas, por isso, também é conhecida como “doença do beijo”. O EBV pertence à família   Herpesviridae,   infectando células epiteliais da nasofaringe e linfócitos B que espalha o vírus pelo organismo. Cerca de 90% dos infectados evoluem para infecção crônica e complicações podem estar associadas ao EBV. Dos anticorpos contra antígenos  específicos do EBV, os que agregam maior valor diagnóstico são os contra o capsídeo viral (VCA – estrutura do vírus), com sensibilidade de 95% a 100% e especificidade de  86% a 100% nos episódios de mononucleose aguda. Anticorpos anti-VCA IgG e IgM tornam-se rapidamente positivos de 1 a 2 semanas de infecção. A presença de IgM anti- VCA usualmente indica infecção aguda pelo EBV, entretanto, infecção aguda por outros herpes vírus podem causar produção de IgM anti-VCA por células que apresentam infecção latente pelo EBV. Falsos-positivos de IgM anti-VCA também são citados em outras infecções recentes (toxoplasmose e adenovírus) e na presença de autoanticorpos. Nos quadros de reativação, a IgM anti-VCA pode ser negativa. Resultados negativos podem ocorrer devido à natureza transitória do IgM. O IgM anti-VCA persiste por 4 a 8 semanas, persistindo por toda a vida (SBPC/ML, 2014). A PCR é um dos métodos mais sensíveis para a detecção do genoma viral. A PCR no  plasma, em conjunto com o painel de sorologia, é útil como teste confirmatório da  infecção, uma vez que parte dos pacientes não apresenta anticorpos heterofílicos e a IGM VCM (anticorpo de fase aguda) tem caráter transitório (SBPC/ML, 2014). Em   pacientes   HIV   positivos   com   linfadenopatia   generalizada   persistente,   a presença de DNA do EBV sérico apresenta risco aumentado do desenvolvimento de linfoma. A detecção do EBV DNA no liquor é uma abordagem prática e alternativa à sorologia ou à cultura para pacientes com complicações no SNC (sistema nervoso central), que ocorre em 1% dos casos, podendo ser a única manifestação clínica da infecção pelo EBV. No liquor, a PCR positiva em pacientes com AIDS e lesões focais cerebrais é um forte indicador de linfoma cerebral. O DNA do EBV pode ser encontrado em tecidos de diversos tumores malignos e benignos, incluindo linfomas, carcinomas nasofaríngeo e carcinomas gástricos (SBPC/ML, 2014).",
+    "synonyms": [
+      "volume corpuscular medio"
+    ],
+    "category": "Hemograma",
+    "unit": "fL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 1,
+        "high": 2
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "593337687-interpretacao-de-exames-laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "VHS",
+    "markerName": "48 Fig. 17 – Nomenclatura das alterações morfológicas das hemácias  - Velocidade de Hemossedimentação (VHS)  Existem, atualmente, vários métodos laboratoriais para veri\u001fcar a existência de marcadores de resposta in\u001eamatória. A velocidade de hemossedimentação (VHS) é um teste simples e de baixo custo que tem sido usado, há mais de meio século, com este objetivo. O exame consiste na medida da altura da camada de hemácias de uma amostra de sangue venoso anticoagulado que se sedimenta",
+    "synonyms": [
+      "velocidade de hemossedimentacao",
+      "hemossedimentacao"
+    ],
+    "category": "Inflamatórios",
+    "unit": "mm/h",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "high": 50
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 376.835,
+        "high": 32
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "pdf": "735783519-E-book-Interpretacao-de-Exames-Em-Bioquimica-Clinica-Farmaceuticando.pdf",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "VITAMINA_B12",
+    "markerName": "54 •   Anemias   por   excesso   de   destruição   ou   regenerativas: ocorre nas anemias hemolíticas ou anemias por perda de sangue.   A   hemólise   pode   ser   causada   por   defeitos intrínsecos,   como   nas   anemias   associadas   a   alterações hereditárias   ou   fatores   extrínsecos,   como   exposição   a toxinas, parasitas ou agentes infecciosos. • Falta de eritropoetina; • Carência de ferro, vitamina B12 e ácido fólico.  Fig. 21 – Tipos de anemias de acordo com os índices hematimétricos. Anemia Normocítica/ Normocrômica Hemorragias Hemólise Doença Renal Doença Crônica Anemia Microcítica/ Hipocrômica Ferropriva Talassemia Sideroblástica Chumbo Anemia Microcítica/ Hipocrômica Megaloblástica/ Perniciosa Aplástica Leucemia Mieloide",
+    "synonyms": [
+      "cobalamina",
+      "b12"
+    ],
+    "category": "Vitaminas",
+    "unit": "pg/mL",
+    "referenceRanges": [
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 8,
+        "high": 10
+      },
+      {
+        "population": "Adultos",
+        "sex": "ANY",
+        "ageRange": "18-65",
+        "low": 2,
+        "high": 5
+      }
+    ],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "markerCode": "VITAMINA_D",
+    "markerName": "Hipercalcemia Hipercalcemia  1. 1.   Hiperparatireoidismo; Hiperparatireoidismo;  2. 2.   Doen Doen ç ç as neopl as neopl á á sicas; sicas;  3. 3.   Intoxica Intoxica ç ç ão por vitamina D; ão por vitamina D;  4. 4.   Doen Doen ç ç a de Paget; a de Paget;  5. 5.   Drogas (Diur Drogas (Diur é é ticos Tiaz ticos Tiaz í í dicos). dicos).",
+    "synonyms": [
+      "25-hidroxivitamina d",
+      "25(oh)d",
+      "calcidiol"
+    ],
+    "category": "Vitaminas",
+    "unit": "ng/mL",
+    "referenceRanges": [],
+    "interpretationHints": [],
+    "sources": [
+      {
+        "pdf": "519938378-Interpretacao-Dos-Exames-Bioquimicos.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "584428493-Ebook-Exames-Laboratoriais.pdf",
+        "pages": [
+          2
+        ]
+      },
+      {
+        "pdf": "700429660-Guia-Para-Interpretacao-de-Hemogramas.pdf",
+        "pages": [
+          3
+        ]
+      }
+    ]
+  }
+]

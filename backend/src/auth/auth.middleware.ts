@@ -16,16 +16,17 @@ declare global {
 }
 
 // Middleware de autenticação
-export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
   try {
     // Obter token do header
     const authHeader = req.headers.authorization
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         error: 'Token não fornecido',
       })
+      return
     }
 
     const token = authHeader.substring(7) // Remove "Bearer "
@@ -38,28 +39,31 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
 
     next()
   } catch (error) {
-    return res.status(401).json({
+    res.status(401).json({
       success: false,
       error: 'Token inválido ou expirado',
     })
+    return
   }
 }
 
 // Middleware de autorização por role
 export const authorize = (...allowedRoles: UserRole[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
     if (!req.user) {
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         error: 'Não autenticado',
       })
+      return
     }
 
     if (!allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({
+      res.status(403).json({
         success: false,
         error: 'Acesso negado',
       })
+      return
     }
 
     next()

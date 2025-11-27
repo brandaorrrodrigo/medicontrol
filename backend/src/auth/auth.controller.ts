@@ -5,13 +5,12 @@ import {
   loginSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
-  refreshTokenSchema,
 } from './auth.validator'
 import { z } from 'zod'
 
 export class AuthController {
   // POST /api/auth/register
-  async register(req: Request, res: Response, next: NextFunction) {
+  async register(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const data = registerSchema.parse(req.body)
       const result = await authService.register(data)
@@ -24,7 +23,7 @@ export class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
       })
 
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         data: {
           user: result.user,
@@ -47,12 +46,12 @@ export class AuthController {
         })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/auth/login
-  async login(req: Request, res: Response, next: NextFunction) {
+  async login(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const data = loginSchema.parse(req.body)
       const result = await authService.login(data)
@@ -65,7 +64,7 @@ export class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
       })
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: {
           user: result.user,
@@ -88,12 +87,12 @@ export class AuthController {
         })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/auth/refresh
-  async refresh(req: Request, res: Response, next: NextFunction) {
+  async refresh(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const refreshToken = req.cookies.refreshToken || req.body.refreshToken
 
@@ -106,7 +105,7 @@ export class AuthController {
 
       const result = await authService.refreshToken(refreshToken)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: result,
       })
@@ -118,12 +117,12 @@ export class AuthController {
         })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/auth/logout
-  async logout(req: Request, res: Response, next: NextFunction) {
+  async logout(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const refreshToken = req.cookies.refreshToken || req.body.refreshToken
 
@@ -133,22 +132,22 @@ export class AuthController {
 
       res.clearCookie('refreshToken')
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Logout realizado com sucesso',
       })
     } catch (error) {
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/auth/forgot-password
-  async forgotPassword(req: Request, res: Response, next: NextFunction) {
+  async forgotPassword(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const data = forgotPasswordSchema.parse(req.body)
       await authService.forgotPassword(data.email)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Se o email existir, você receberá instruções para redefinir sua senha',
       })
@@ -161,17 +160,17 @@ export class AuthController {
         })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/auth/reset-password
-  async resetPassword(req: Request, res: Response, next: NextFunction) {
+  async resetPassword(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const data = resetPasswordSchema.parse(req.body)
       await authService.resetPassword(data.token, data.password)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Senha redefinida com sucesso',
       })
@@ -191,12 +190,12 @@ export class AuthController {
         })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/auth/me
-  async me(req: Request, res: Response, next: NextFunction) {
+  async me(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = (req as any).user?.userId
 
@@ -209,7 +208,7 @@ export class AuthController {
 
       const user = await authService.getMe(userId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: user,
       })
@@ -221,7 +220,7 @@ export class AuthController {
         })
       }
 
-      next(error)
+      return next(error)
     }
   }
 }

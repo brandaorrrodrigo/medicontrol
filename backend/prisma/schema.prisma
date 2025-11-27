@@ -50,6 +50,14 @@ enum ExamStatus {
   CANCELLED
 }
 
+enum ExamSource {
+  PDF
+  PHOTO
+  MANUAL
+  VOICE
+  OTHER
+}
+
 enum NotificationType {
   INFO
   WARNING
@@ -57,11 +65,45 @@ enum NotificationType {
   DANGER
 }
 
+enum NotificationCategory {
+  EXAM_ALERT // Alerta de exame crítico/tendência
+  MEDICATION_REMINDER // Lembrete de medicação
+  APPOINTMENT // Consulta agendada
+  STOCK_ALERT // Estoque de medicamento
+  SYSTEM // Notificação do sistema
+  HEALTH_INSIGHT // Insight de saúde
+}
+
+enum NotificationChannel {
+  IN_APP // Notificação no app
+  EMAIL // Email
+  PUSH // Push notification
+  SMS // SMS (futuro)
+}
+
+enum ExamAlertType {
+  CRITICAL_VALUE // Valor crítico detectado
+  CONCERNING_TREND // Tendência preocupante
+  OUT_OF_RANGE // Valor fora da faixa
+  RAPID_CHANGE // Mudança rápida
+  MULTIPLE_ABNORMAL // Múltiplos marcadores alterados
+}
+
 enum ConsultationType {
   FIRST_VISIT
   RETURN
   EMERGENCY
   ROUTINE
+  URGENT
+  FOLLOW_UP
+}
+
+enum ConsultationStatus {
+  SCHEDULED
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }
 
 enum PhotoType {
@@ -109,6 +151,31 @@ enum StockUnitType {
   UNIT
 }
 
+enum SourceDocumentStatus {
+  PENDING
+  PROCESSING
+  PROCESSED
+  ERROR
+}
+
+enum ExtractedFactStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  APPLIED
+}
+
+enum MedicalFactType {
+  DESIRED_EFFECT
+  SIDE_EFFECT
+  SERIOUS_SIDE_EFFECT
+  DRUG_DRUG_INTERACTION
+  DRUG_FOOD_INTERACTION
+  ONSET_TIME
+  CONTRAINDICATION
+  DOSAGE_RECOMMENDATION
+}
+
 // ============================================================================
 // USER MANAGEMENT
 // ============================================================================
@@ -131,7 +198,8 @@ model User {
   professional Professional?
 
   // Notificações
-  notifications Notification[]
+  notifications           Notification[]
+  notificationPreferences NotificationPreference?
 
   @@index([email])
   @@index([role])
@@ -166,9 +234,9 @@ model PasswordReset {
 // ============================================================================
 
 model Patient {
-  id               String    @id @default(uuid())
-  userId           String    @unique
-  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   name             String
   phone            String?
   dateOfBirth      DateTime
@@ -177,8 +245,8 @@ model Patient {
   conditions       String[]
   allergies        String[]
   emergencyContact Json? // { name, phone, relationship }
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   // Relações
   medications         Medication[]
@@ -191,12 +259,19 @@ model Patient {
   medicationPhotos    MedicationPhoto[]
   adherenceRecords    TreatmentAdherence[]
   medicationAlerts    MedicationAlert[]
+  examAlerts          ExamAlert[]
 
   // Relação com cuidadores (N:N)
   caregivers PatientCaregiver[]
 
   // Relação com profissionais (N:N)
   professionals PatientProfessional[]
+
+  // Dashboard e Gamificação
+  dashboardConfig  DashboardConfig?
+  gamification     UserGamification?
+  userAchievements UserAchievement[]
+  activityLogs     ActivityLog[]
 
   @@index([userId])
   @@index([name])
@@ -313,17 +388,17 @@ model Medication {
 }
 
 model MedicationSchedule {
-  id           String    @id @default(uuid())
+  id           String     @id @default(uuid())
   medicationId String
   medication   Medication @relation(fields: [medicationId], references: [id], onDelete: Cascade)
   patientId    String
-  patient      Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patient      Patient    @relation(fields: [patientId], references: [id], onDelete: Cascade)
   scheduledFor DateTime
-  taken        Boolean   @default(false)
+  taken        Boolean    @default(false)
   takenAt      DateTime?
   notes        String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   @@index([medicationId])
   @@index([patientId])
@@ -369,15 +444,49 @@ model Exam {
   doctor    String?
   location  String?
   notes     String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+
+  // Campos para PDF upload
+  pdfUploaded      Boolean @default(false)
+  pdfPath          String?
+  rawTextExtracted String? @db.Text
+  extractionMethod String? // "text" ou "ocr"
+
+  // Campos para foto upload (OCR)
+  photoUploaded      Boolean @default(false)
+  photoPath          String?
+  processedPhotoPath String? // Foto após pré-processamento
+  ocrConfidence      Float? // Confiança do OCR (0-100)
+  imageQuality       String? // "excellent", "good", "fair", "poor"
+
+  // Campos para entrada manual
+  manualEntry Boolean @default(false)
+
+  // Campos para entrada por voz
+  voiceEntry Boolean @default(false)
+
+  // Origem do exame
+  source ExamSource? // PDF, PHOTO, MANUAL, VOICE, OTHER
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Arquivos anexados (PDFs, imagens)
   files ExamFile[]
 
+  // Resultados individuais dos marcadores
+  results ExamResult[]
+
+  // Alertas relacionados
+  alerts ExamAlert[]
+
   @@index([patientId])
   @@index([status])
   @@index([date])
+  @@index([pdfUploaded])
+  @@index([photoUploaded])
+  @@index([manualEntry])
+  @@index([voiceEntry])
+  @@index([source])
 }
 
 model ExamFile {
@@ -393,23 +502,56 @@ model ExamFile {
   @@index([examId])
 }
 
+model ExamResult {
+  id     String @id @default(uuid())
+  examId String
+  exam   Exam   @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  // Identificação do marcador
+  markerCode String
+  markerName String
+
+  // Valor e unidade
+  value Float
+  unit  String
+
+  // Interpretação
+  status             String // CRITICAL_LOW, LOW, NORMAL, HIGH, CRITICAL_HIGH, UNKNOWN
+  interpretationText String? @db.Text
+
+  // Faixa de referência usada
+  referenceMin Float?
+  referenceMax Float?
+
+  // Metadados de extração
+  confidence       Float? // 0-1, confiança na extração
+  extractionMethod String? // "regex", "heuristic", "ai"
+  rawTextSnippet   String? @db.Text
+
+  createdAt DateTime @default(now())
+
+  @@index([examId])
+  @@index([markerCode])
+  @@index([status])
+}
+
 // ============================================================================
 // PHOTOS (Before/After)
 // ============================================================================
 
 model Photo {
-  id              String    @id @default(uuid())
-  patientId       String
-  patient         Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  type            PhotoType
-  filename        String
-  filepath        String
-  mimetype        String
-  size            Int
-  date            DateTime  @default(now())
-  treatmentPhase  String?
-  notes           String?
-  createdAt       DateTime  @default(now())
+  id             String    @id @default(uuid())
+  patientId      String
+  patient        Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  type           PhotoType
+  filename       String
+  filepath       String
+  mimetype       String
+  size           Int
+  date           DateTime  @default(now())
+  treatmentPhase String?
+  notes          String?
+  createdAt      DateTime  @default(now())
 
   @@index([patientId])
   @@index([type])
@@ -421,23 +563,23 @@ model Photo {
 // ============================================================================
 
 model MedicationPhoto {
-  id               String               @id @default(uuid())
-  patientId        String
-  patient          Patient              @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  medicationId     String
-  medication       Medication           @relation(fields: [medicationId], references: [id], onDelete: Cascade)
-  prescriptionId   String?
-  prescription     Prescription?        @relation(fields: [prescriptionId], references: [id], onDelete: SetNull)
-  type             MedicationPhotoType
-  filename         String
-  filepath         String
-  mimetype         String
-  size             Int
-  takenAt          DateTime             @default(now())
-  notes            String?
-  ocrText          String?              // Reservado para futura leitura automática
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
+  id             String              @id @default(uuid())
+  patientId      String
+  patient        Patient             @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  medicationId   String
+  medication     Medication          @relation(fields: [medicationId], references: [id], onDelete: Cascade)
+  prescriptionId String?
+  prescription   Prescription?       @relation(fields: [prescriptionId], references: [id], onDelete: SetNull)
+  type           MedicationPhotoType
+  filename       String
+  filepath       String
+  mimetype       String
+  size           Int
+  takenAt        DateTime            @default(now())
+  notes          String?
+  ocrText        String? // Reservado para futura leitura automática
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
 
   @@index([patientId])
   @@index([medicationId])
@@ -451,20 +593,163 @@ model MedicationPhoto {
 // ============================================================================
 
 model Notification {
-  id        String           @id @default(uuid())
-  userId    String
-  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  title     String
-  message   String
-  type      NotificationType
-  read      Boolean          @default(false)
-  actionUrl String?
-  timestamp DateTime         @default(now())
-  createdAt DateTime         @default(now())
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Conteúdo
+  title    String
+  message  String               @db.Text
+  type     NotificationType
+  category NotificationCategory @default(SYSTEM)
+
+  // Status
+  read   Boolean   @default(false)
+  readAt DateTime?
+
+  // Ação
+  actionUrl   String?
+  actionLabel String? // Ex: "Ver Detalhes", "Agendar Consulta"
+
+  // Metadata
+  metadata Json? // Dados extras (examId, markerCode, etc)
+
+  // Envio por canais
+  sentInApp   Boolean   @default(true)
+  sentEmail   Boolean   @default(false)
+  sentEmailAt DateTime?
+  sentPush    Boolean   @default(false)
+  sentPushAt  DateTime?
+
+  // Timestamps
+  timestamp DateTime  @default(now())
+  createdAt DateTime  @default(now())
+  expiresAt DateTime? // Notificações podem expirar
 
   @@index([userId])
+  @@index([category])
   @@index([read])
   @@index([timestamp])
+  @@index([expiresAt])
+}
+
+// ============================================================================
+// NOTIFICATION PREFERENCES
+// ============================================================================
+
+model NotificationPreference {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Preferências por categoria
+  examAlertsEnabled      Boolean @default(true)
+  examAlertsEmail        Boolean @default(true)
+  examAlertsPush         Boolean @default(true)
+  examAlertsCriticalOnly Boolean @default(false)
+
+  medicationRemindersEnabled Boolean @default(true)
+  medicationRemindersEmail   Boolean @default(false)
+  medicationRemindersPush    Boolean @default(true)
+
+  appointmentsEnabled Boolean @default(true)
+  appointmentsEmail   Boolean @default(true)
+  appointmentsPush    Boolean @default(true)
+
+  stockAlertsEnabled Boolean @default(true)
+  stockAlertsEmail   Boolean @default(false)
+  stockAlertsPush    Boolean @default(true)
+
+  healthInsightsEnabled Boolean @default(true)
+  healthInsightsEmail   Boolean @default(false)
+  healthInsightsPush    Boolean @default(false)
+
+  // Configurações gerais
+  emailDigest     Boolean @default(false) // Receber resumo diário por email
+  emailDigestTime String  @default("08:00") // Horário do resumo
+
+  quietHoursEnabled Boolean @default(false)
+  quietHoursStart   String  @default("22:00")
+  quietHoursEnd     String  @default("08:00")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ============================================================================
+// EXAM ALERTS (Alertas específicos de exames)
+// ============================================================================
+
+model ExamAlert {
+  id String @id @default(uuid())
+
+  // Paciente e usuários relacionados
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  // Exame e marcador relacionados
+  examId     String?
+  exam       Exam?   @relation(fields: [examId], references: [id], onDelete: SetNull)
+  markerCode String?
+  markerName String?
+
+  // Tipo e severidade
+  type     ExamAlertType
+  severity AlertSeverity
+
+  // Conteúdo do alerta
+  title   String
+  message String @db.Text
+
+  // Detalhes do valor
+  value        Float?
+  unit         String?
+  referenceMin Float?
+  referenceMax Float?
+
+  // Detalhes da tendência (se aplicável)
+  trendDirection  String? // UP, DOWN, STABLE
+  trendSlope      Float? // % de mudança por mês
+  trendConfidence Float? // R²
+
+  // Status
+  acknowledged   Boolean   @default(false)
+  acknowledgedAt DateTime?
+  acknowledgedBy String? // userId de quem reconheceu
+
+  resolved        Boolean   @default(false)
+  resolvedAt      DateTime?
+  resolvedBy      String?
+  resolutionNotes String?   @db.Text
+
+  // Ação recomendada
+  recommendedAction String? @db.Text
+  actionUrl         String?
+
+  // Notificações enviadas
+  notificationSent Boolean   @default(false)
+  notificationId   String?
+  emailSent        Boolean   @default(false)
+  emailSentAt      DateTime?
+
+  // Metadata
+  metadata Json? // Dados extras para contexto
+
+  // Timestamps
+  triggeredAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([patientId])
+  @@index([examId])
+  @@index([markerCode])
+  @@index([type])
+  @@index([severity])
+  @@index([acknowledged])
+  @@index([resolved])
+  @@index([triggeredAt])
 }
 
 // ============================================================================
@@ -472,22 +757,25 @@ model Notification {
 // ============================================================================
 
 model Consultation {
-  id             String           @id @default(uuid())
+  id             String             @id @default(uuid())
   patientId      String
-  patient        Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patient        Patient            @relation(fields: [patientId], references: [id], onDelete: Cascade)
   professionalId String
-  professional   Professional     @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  professional   Professional       @relation(fields: [professionalId], references: [id], onDelete: Cascade)
   type           ConsultationType
+  status         ConsultationStatus @default(SCHEDULED)
   date           DateTime
   duration       Int // em minutos
+  location       String?
   notes          String?
   diagnosis      String?
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
 
   @@index([patientId])
   @@index([professionalId])
   @@index([date])
+  @@index([status])
 }
 
 // ============================================================================
@@ -495,15 +783,15 @@ model Consultation {
 // ============================================================================
 
 model Prescription {
-  id             String             @id @default(uuid())
+  id             String       @id @default(uuid())
   patientId      String
-  patient        Patient            @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patient        Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
   professionalId String
-  professional   Professional       @relation(fields: [professionalId], references: [id], onDelete: Cascade)
-  date           DateTime           @default(now())
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  date           DateTime     @default(now())
   notes          String?
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 
   // Itens da prescrição
   items PrescriptionItem[]
@@ -538,14 +826,14 @@ model PrescriptionItem {
 // ============================================================================
 
 model TreatmentAdherence {
-  id                String   @id @default(uuid())
-  patientId         String
-  patient           Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  date              DateTime @default(now())
-  totalScheduled    Int
-  totalTaken        Int
-  adherenceRate     Float // porcentagem
-  createdAt         DateTime @default(now())
+  id             String   @id @default(uuid())
+  patientId      String
+  patient        Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  date           DateTime @default(now())
+  totalScheduled Int
+  totalTaken     Int
+  adherenceRate  Float // porcentagem
+  createdAt      DateTime @default(now())
 
   @@index([patientId])
   @@index([date])
@@ -556,19 +844,19 @@ model TreatmentAdherence {
 // ============================================================================
 
 model MedicationStock {
-  id                       String        @id @default(uuid())
-  medicationId             String        @unique
-  medication               Medication    @relation(fields: [medicationId], references: [id], onDelete: Cascade)
-  currentQuantity          Float
-  initialQuantity          Float
-  unitType                 StockUnitType
-  lowStockThreshold        Float         @default(30) // Percentual (30%)
-  criticalStockThreshold   Float         @default(10) // Percentual (10%)
-  lastRestockDate          DateTime?
-  nextRestockDate          DateTime?
-  notes                    String?
-  createdAt                DateTime      @default(now())
-  updatedAt                DateTime      @updatedAt
+  id                     String        @id @default(uuid())
+  medicationId           String        @unique
+  medication             Medication    @relation(fields: [medicationId], references: [id], onDelete: Cascade)
+  currentQuantity        Float
+  initialQuantity        Float
+  unitType               StockUnitType
+  lowStockThreshold      Float         @default(30) // Percentual (30%)
+  criticalStockThreshold Float         @default(10) // Percentual (10%)
+  lastRestockDate        DateTime?
+  nextRestockDate        DateTime?
+  notes                  String?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
 
   @@index([medicationId])
   @@index([currentQuantity])
@@ -579,15 +867,15 @@ model MedicationStock {
 // ============================================================================
 
 model DrugInteraction {
-  id             String         @id @default(uuid())
+  id             String        @id @default(uuid())
   drugA          String // Nome do medicamento A (normalizado)
   drugB          String // Nome do medicamento B (normalizado)
   severity       AlertSeverity
   description    String
   recommendation String?
   source         String? // Fonte da informação (ANVISA, bula, etc)
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   @@unique([drugA, drugB])
   @@index([drugA])
@@ -596,15 +884,15 @@ model DrugInteraction {
 }
 
 model DrugFoodInteraction {
-  id             String         @id @default(uuid())
+  id             String        @id @default(uuid())
   drugName       String // Nome do medicamento (normalizado)
   foodName       String // Nome do alimento/grupo alimentar
   severity       AlertSeverity
   description    String
   recommendation String?
   source         String?
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   @@unique([drugName, foodName])
   @@index([drugName])
@@ -617,26 +905,26 @@ model DrugFoodInteraction {
 // ============================================================================
 
 model MedicationAlert {
-  id             String              @id @default(uuid())
-  patientId      String
-  patient        Patient             @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  medicationId   String?
-  medication     Medication?         @relation(fields: [medicationId], references: [id], onDelete: Cascade)
-  type           MedicationAlertType
-  severity       AlertSeverity
-  title          String
-  message        String
-  read           Boolean             @default(false)
-  resolved       Boolean             @default(false)
-  actionUrl      String?
-  metadata       Json? // Dados extras (ex: scheduleId, interaction details, stock levels)
-  triggeredAt    DateTime            @default(now())
-  readAt         DateTime?
-  resolvedAt     DateTime?
-  emailSent      Boolean             @default(false)
-  emailSentAt    DateTime?
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
+  id           String              @id @default(uuid())
+  patientId    String
+  patient      Patient             @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  medicationId String?
+  medication   Medication?         @relation(fields: [medicationId], references: [id], onDelete: Cascade)
+  type         MedicationAlertType
+  severity     AlertSeverity
+  title        String
+  message      String
+  read         Boolean             @default(false)
+  resolved     Boolean             @default(false)
+  actionUrl    String?
+  metadata     Json? // Dados extras (ex: scheduleId, interaction details, stock levels)
+  triggeredAt  DateTime            @default(now())
+  readAt       DateTime?
+  resolvedAt   DateTime?
+  emailSent    Boolean             @default(false)
+  emailSentAt  DateTime?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
 
   @@index([patientId])
   @@index([medicationId])
@@ -645,4 +933,161 @@ model MedicationAlert {
   @@index([read])
   @@index([resolved])
   @@index([triggeredAt])
+}
+
+// ============================================================================
+// MEDICAL LIBRARY - PHARMACOLOGICAL DATABASE
+// ============================================================================
+
+model MedicalSourceDocument {
+  id                    String               @id @default(uuid())
+  title                 String
+  authors               String?
+  year                  Int?
+  sourceType            String               @default("ebook") // "ebook", "article", "guideline", "textbook"
+  filePath              String               @unique // Caminho relativo em medlibrary/original_pdfs/
+  status                SourceDocumentStatus @default(PENDING)
+  pagesCount            Int?
+  notes                 String?
+  processingStartedAt   DateTime?
+  processingCompletedAt DateTime?
+  errorMessage          String?
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+
+  // Relação com fatos extraídos
+  extractedFacts ExtractedMedicalFact[]
+
+  @@index([status])
+  @@index([sourceType])
+  @@index([createdAt])
+}
+
+model ExtractedMedicalFact {
+  id               String                @id @default(uuid())
+  sourceDocumentId String
+  sourceDocument   MedicalSourceDocument @relation(fields: [sourceDocumentId], references: [id], onDelete: Cascade)
+
+  // Informação principal
+  medicationName String
+  factType       MedicalFactType
+
+  // Campos opcionais dependendo do tipo
+  otherMedicationName String? // Para drug-drug interactions
+  foodKey             String? // Para drug-food interactions (ex: "alcool", "cafeina", "leite")
+
+  // Descrição e recomendação
+  description    String         @db.Text
+  recommendation String?        @db.Text
+  severity       AlertSeverity? // Reutilizando enum existente
+
+  // Onset time (tempo até efeito)
+  typicalOnsetHoursMin Int?
+  typicalOnsetHoursMax Int?
+
+  // Metadados de evidência
+  evidenceLevel String? // "alta", "moderada", "baixa", "expert_opinion"
+  rawText       String  @db.Text // Texto original do eBook
+  pageRange     String? // Ex: "12-14", "45"
+
+  // Status de revisão
+  status      ExtractedFactStatus @default(PENDING_REVIEW)
+  reviewNotes String?             @db.Text
+  reviewedBy  String? // ID do usuário que revisou (opcional)
+  reviewedAt  DateTime?
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sourceDocumentId])
+  @@index([medicationName])
+  @@index([factType])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ============================================================================
+// DASHBOARD CONFIGURATION
+// ============================================================================
+
+model DashboardConfig {
+  id        String   @id @default(uuid())
+  patientId String   @unique
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  widgets   Json // Array de widgets
+  layout    String   @default("grid")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId])
+}
+
+// ============================================================================
+// GAMIFICATION SYSTEM
+// ============================================================================
+
+model UserGamification {
+  id            String   @id @default(uuid())
+  patientId     String   @unique
+  patient       Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  level         Int      @default(1)
+  currentXP     Int      @default(0)
+  totalXP       Int      @default(0)
+  currentStreak Int      @default(0)
+  bestStreak    Int      @default(0)
+  totalDays     Int      @default(0)
+  lastActive    DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([patientId])
+}
+
+model Achievement {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String
+  category    String // medication, exams, vitals, consistency, special
+  rarity      String // common, rare, epic, legendary
+  icon        String // trophy, medal, star, crown, etc
+  total       Int // Total necessário para desbloquear (ex: 7 dias)
+  xp          Int // XP ao desbloquear
+  createdAt   DateTime @default(now())
+
+  userAchievements UserAchievement[]
+
+  @@index([category])
+  @@index([rarity])
+}
+
+model UserAchievement {
+  id            String      @id @default(uuid())
+  patientId     String
+  patient       Patient     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  achievementId String
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  progress      Int         @default(0)
+  unlocked      Boolean     @default(false)
+  unlockedAt    DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@unique([patientId, achievementId])
+  @@index([patientId])
+  @@index([achievementId])
+  @@index([unlocked])
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  patientId String
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  type      String // medication, exam, vital, consultation, etc
+  date      DateTime @default(now())
+  metadata  Json? // Dados adicionais
+  createdAt DateTime @default(now())
+
+  @@index([patientId, date])
+  @@index([type])
 }

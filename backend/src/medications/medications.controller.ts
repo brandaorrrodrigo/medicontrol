@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export class MedicationsController {
   // GET /api/medications?patientId=xxx&active=true
-  async getMedications(req: Request, res: Response, next: NextFunction) {
+  async getMedications(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -24,32 +24,32 @@ export class MedicationsController {
       const activeOnly = active === 'true'
       const medications = await medicationsService.getMedications(patientId, activeOnly)
 
-      res.status(200).json({ success: true, data: medications })
+      return res.status(200).json({ success: true, data: medications })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(403).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/medications/:id
-  async getMedicationById(req: Request, res: Response, next: NextFunction) {
+  async getMedicationById(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
       const medication = await medicationsService.getMedicationById(id)
 
-      res.status(200).json({ success: true, data: medication })
+      return res.status(200).json({ success: true, data: medication })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/medications
-  async createMedication(req: Request, res: Response, next: NextFunction) {
+  async createMedication(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -59,7 +59,7 @@ export class MedicationsController {
       const data = createMedicationSchema.parse(req.body)
       const medication = await medicationsService.createMedication(data, userId)
 
-      res.status(201).json({ success: true, data: medication })
+      return res.status(201).json({ success: true, data: medication })
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
@@ -73,12 +73,12 @@ export class MedicationsController {
         return res.status(403).json({ success: false, error: error.message })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // PUT /api/medications/:id
-  async updateMedication(req: Request, res: Response, next: NextFunction) {
+  async updateMedication(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -89,7 +89,7 @@ export class MedicationsController {
       const data = updateMedicationSchema.parse(req.body)
       const medication = await medicationsService.updateMedication(id, data, userId)
 
-      res.status(200).json({ success: true, data: medication })
+      return res.status(200).json({ success: true, data: medication })
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
@@ -103,12 +103,12 @@ export class MedicationsController {
         return res.status(404).json({ success: false, error: error.message })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/medications/:id
-  async deleteMedication(req: Request, res: Response, next: NextFunction) {
+  async deleteMedication(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -118,12 +118,12 @@ export class MedicationsController {
       const { id } = req.params
       const result = await medicationsService.deleteMedication(id, userId)
 
-      res.status(200).json({ success: true, data: result })
+      return res.status(200).json({ success: true, data: result })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 }

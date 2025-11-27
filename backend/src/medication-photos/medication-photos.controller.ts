@@ -6,7 +6,7 @@ import { MedicationPhotoType } from '@prisma/client'
 
 export class MedicationPhotosController {
   // GET /api/medications/:medicationId/photos?type=MEDICATION_BOX
-  async getMedicationPhotos(req: Request, res: Response, next: NextFunction) {
+  async getMedicationPhotos(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { medicationId } = req.params
       const { type } = req.query
@@ -19,34 +19,34 @@ export class MedicationPhotosController {
         userId
       )
 
-      res.status(200).json({ success: true, data: photos })
+      return res.status(200).json({ success: true, data: photos })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(403).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/medications/photos/:photoId
-  async getMedicationPhotoById(req: Request, res: Response, next: NextFunction) {
+  async getMedicationPhotoById(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { photoId } = req.params
       const userId = req.user?.userId
 
       const photo = await medicationPhotosService.getMedicationPhotoById(photoId, userId)
 
-      res.status(200).json({ success: true, data: photo })
+      return res.status(200).json({ success: true, data: photo })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/medications/:medicationId/photos
-  async uploadMedicationPhoto(req: Request, res: Response, next: NextFunction) {
+  async uploadMedicationPhoto(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -78,7 +78,7 @@ export class MedicationPhotosController {
         userId
       )
 
-      res.status(201).json({ success: true, data: photo })
+      return res.status(201).json({ success: true, data: photo })
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
@@ -92,12 +92,12 @@ export class MedicationPhotosController {
         return res.status(403).json({ success: false, error: error.message })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // PUT /api/medications/photos/:photoId
-  async updateMedicationPhoto(req: Request, res: Response, next: NextFunction) {
+  async updateMedicationPhoto(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -113,7 +113,7 @@ export class MedicationPhotosController {
         userId
       )
 
-      res.status(200).json({ success: true, data: photo })
+      return res.status(200).json({ success: true, data: photo })
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
@@ -127,12 +127,12 @@ export class MedicationPhotosController {
         return res.status(404).json({ success: false, error: error.message })
       }
 
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/medications/photos/:photoId
-  async deleteMedicationPhoto(req: Request, res: Response, next: NextFunction) {
+  async deleteMedicationPhoto(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const userId = req.user?.userId
       if (!userId) {
@@ -142,17 +142,17 @@ export class MedicationPhotosController {
       const { photoId } = req.params
       const result = await medicationPhotosService.deleteMedicationPhoto(photoId, userId)
 
-      res.status(200).json({ success: true, data: result })
+      return res.status(200).json({ success: true, data: result })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/patients/:patientId/medication-photos?type=MEDICATION_BOX
-  async getPatientMedicationPhotos(req: Request, res: Response, next: NextFunction) {
+  async getPatientMedicationPhotos(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId } = req.params
       const { type } = req.query
@@ -165,12 +165,12 @@ export class MedicationPhotosController {
         userId
       )
 
-      res.status(200).json({ success: true, data: photos })
+      return res.status(200).json({ success: true, data: photos })
     } catch (error) {
       if (error instanceof Error) {
         return res.status(403).json({ success: false, error: error.message })
       }
-      next(error)
+      return next(error)
     }
   }
 }

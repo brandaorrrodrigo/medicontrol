@@ -1,12 +1,18 @@
-import { prisma } from '../config/database'
+import { prisma } from '../database/prisma'
 import { MedicationPhotoType } from '@prisma/client'
-import { UploadMedicationPhotoInput, UpdateMedicationPhotoInput } from './medication-photos.validator'
+import {
+  UploadMedicationPhotoInput,
+  UpdateMedicationPhotoInput,
+} from './medication-photos.validator'
 import fs from 'fs/promises'
-import path from 'path'
+import _path from 'path'
 
 export class MedicationPhotosService {
   // Verificar se o usuário tem permissão para acessar o medicamento
-  private async verifyMedicationAccess(medicationId: string, userId: string): Promise<void> {
+  private async verifyMedicationAccess(
+    medicationId: string,
+    userId: string,
+  ): Promise<void> {
     const medication = await prisma.medication.findUnique({
       where: { id: medicationId },
       include: {
@@ -43,7 +49,7 @@ export class MedicationPhotosService {
 
     // Verificar se é um cuidador do paciente
     const isCaregiver = medication.patient.caregivers.some(
-      (pc) => pc.caregiver.userId === userId
+      (pc: any) => pc.caregiver.userId === userId,
     )
     if (isCaregiver) {
       return
@@ -51,7 +57,7 @@ export class MedicationPhotosService {
 
     // Verificar se é um profissional do paciente
     const isProfessional = medication.patient.professionals.some(
-      (pp) => pp.professional.userId === userId
+      (pp: any) => pp.professional.userId === userId,
     )
     if (isProfessional) {
       return
@@ -64,7 +70,7 @@ export class MedicationPhotosService {
   async getMedicationPhotos(
     medicationId: string,
     type?: MedicationPhotoType,
-    userId?: string
+    userId?: string,
   ) {
     // Verificar acesso se userId fornecido
     if (userId) {
@@ -154,7 +160,7 @@ export class MedicationPhotosService {
     medicationId: string,
     file: Express.Multer.File,
     data: UploadMedicationPhotoInput,
-    userId: string
+    userId: string,
   ) {
     // Verificar acesso
     await this.verifyMedicationAccess(medicationId, userId)
@@ -212,7 +218,7 @@ export class MedicationPhotosService {
   async updateMedicationPhoto(
     photoId: string,
     data: UpdateMedicationPhotoInput,
-    userId: string
+    userId: string,
   ) {
     const photo = await this.getMedicationPhotoById(photoId)
 
@@ -267,7 +273,7 @@ export class MedicationPhotosService {
   async getPatientMedicationPhotos(
     patientId: string,
     type?: MedicationPhotoType,
-    userId?: string
+    userId?: string,
   ) {
     // Verificar se o usuário tem acesso ao paciente
     if (userId) {
@@ -297,8 +303,12 @@ export class MedicationPhotosService {
       }
 
       const isOwner = patient.userId === userId
-      const isCaregiver = patient.caregivers.some((pc) => pc.caregiver.userId === userId)
-      const isProfessional = patient.professionals.some((pp) => pp.professional.userId === userId)
+      const isCaregiver = patient.caregivers.some(
+        (pc: any) => pc.caregiver.userId === userId,
+      )
+      const isProfessional = patient.professionals.some(
+        (pp: any) => pp.professional.userId === userId,
+      )
 
       if (!isOwner && !isCaregiver && !isProfessional) {
         throw new Error('Você não tem permissão para acessar este paciente')

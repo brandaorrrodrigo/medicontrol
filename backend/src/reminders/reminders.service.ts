@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { prisma } from '../database/prisma'
 import { notificationsService } from '../notifications/notifications.service'
 

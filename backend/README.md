@@ -266,6 +266,50 @@ npm start
 | PATCH | `/api/consultations/:id/status` | Atualizar status | Sim |
 | DELETE | `/api/consultations/:id` | Deletar consulta | Sim |
 
+### Alertas Medicamentosos
+
+| Método | Endpoint | Descrição | Auth |
+|--------|----------|-----------|------|
+| GET | `/api/alerts` | Listar alertas com filtros | Sim |
+| GET | `/api/alerts?type=DOSE_TIME` | Filtrar por tipo | Sim |
+| GET | `/api/alerts?severity=HIGH` | Filtrar por severidade | Sim |
+| GET | `/api/alerts?read=false` | Apenas não lidos | Sim |
+| GET | `/api/alerts?resolved=false` | Apenas pendentes | Sim |
+| GET | `/api/alerts/count` | Contar alertas não lidos | Sim |
+| PATCH | `/api/alerts/:id/read` | Marcar alerta como lido | Sim |
+| PATCH | `/api/alerts/:id/resolve` | Marcar alerta como resolvido | Sim |
+| POST | `/api/alerts/read-all` | Marcar todos como lidos | Sim |
+| POST | `/api/alerts/refresh` | Regenerar alertas (DEBUG) | Sim |
+
+**Tipos de alertas:**
+- `DOSE_TIME` - Horário de tomar medicamento
+- `DRUG_INTERACTION` - Interação medicamento-medicamento
+- `FOOD_INTERACTION` - Interação medicamento-alimento
+- `STOCK_LOW` - Estoque baixo (30%)
+- `STOCK_CRITICAL` - Estoque crítico (10%)
+- `STOCK_LAST_UNIT` - Última unidade
+- `TREATMENT_ENDING` - Tratamento terminando em breve
+
+**Severidades:** `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`
+
+### Gerenciamento de Estoque
+
+| Método | Endpoint | Descrição | Auth |
+|--------|----------|-----------|------|
+| GET | `/api/medications/:medicationId/stock` | Obter estoque do medicamento | Sim |
+| POST | `/api/medications/:medicationId/stock` | Criar estoque | Sim |
+| PUT | `/api/medications/:medicationId/stock` | Atualizar estoque | Sim |
+| DELETE | `/api/medications/:medicationId/stock` | Deletar estoque | Sim |
+| POST | `/api/medications/:medicationId/stock/consume` | Consumir quantidade | Sim |
+| POST | `/api/medications/:medicationId/stock/restock` | Reabastecer estoque | Sim |
+
+**Tipos de unidade:** `PILL`, `TABLET`, `CAPSULE`, `ML`, `MG`, `G`, `DROP`, `SPRAY`, `PATCH`, `AMPULE`, `VIAL`, `UNIT`
+
+**Observação:** O sistema de estoque gera alertas automáticos quando:
+- Estoque atinge 30% (alerta baixo)
+- Estoque atinge 10% (alerta crítico)
+- Resta apenas 1 unidade (alerta última unidade)
+
 ### Exemplo de Registro
 
 ```json
@@ -357,6 +401,11 @@ fetch('http://localhost:3001/api/auth/me', {
 - **Professional** - Profissionais de saúde
 - **Medication** - Medicamentos
 - **MedicationSchedule** - Lembretes de medicamentos
+- **MedicationPhoto** - Fotos dos medicamentos (caixa, frasco, bula, receita)
+- **MedicationStock** - Estoque de medicamentos
+- **MedicationAlert** - Alertas medicamentosos (horários, interações, estoque, fim de tratamento)
+- **DrugInteraction** - Base de dados de interações medicamentosas
+- **DrugFoodInteraction** - Base de dados de interações medicamento-alimento
 - **VitalSign** - Sinais vitais
 - **Exam** - Exames
 - **Photo** - Fotos antes/depois
@@ -469,7 +518,27 @@ Após rodar `npm run prisma:seed`, você terá:
 - [x] Dashboard endpoints (paciente, cuidador, profissional) ✅
 - [x] Notificações CRUD ✅
 - [x] Medicamentos CRUD ✅
+- [x] Fotos dos Medicamentos CRUD + upload ✅
+  - Fotos de caixa, frasco, bula e receita
+  - Análise futura com OCR (via Ollama local)
 - [x] Lembretes (schedules) ✅
+- [x] **Sistema de Alertas Medicamentosos** ✅
+  - Alertas de horários de medicamentos
+  - Detecção de interações medicamento-medicamento
+  - Detecção de interações medicamento-alimento
+  - Alertas de estoque (baixo, crítico, última unidade)
+  - Alertas de fim de tratamento
+  - 7 tipos de alertas com 4 níveis de severidade
+- [x] **Gerenciamento de Estoque** ✅
+  - Controle de quantidade de medicamentos
+  - Consumo automático ao tomar medicamento
+  - Reabastecimento de estoque
+  - Alertas automáticos por nível de estoque
+- [x] **Base de Interações Medicamentosas** ✅
+  - 17 interações medicamento-medicamento comuns no Brasil
+  - 19 interações medicamento-alimento
+  - Dados baseados em ANVISA e literatura científica
+  - Seed automático com dados reais
 - [x] Sinais vitais CRUD + cálculo automático de status ✅
 - [x] Pacientes CRUD + vinculação de cuidadores/profissionais ✅
 - [x] Exames CRUD + upload de arquivos ✅
@@ -479,15 +548,21 @@ Após rodar `npm run prisma:seed`, você terá:
 - [x] Lembretes automatizados (node-cron) ✅
   - Lembretes de medicamentos (a cada 30 minutos)
   - Lembretes de consultas (a cada 1 hora)
+- [x] IA Local com Ollama ✅
+  - Funções utilitárias para processamento de texto
+  - 100% local, sem APIs externas
+  - Futuro: OCR de bulas e receitas
 
 📋 **Módulos futuros:**
 
 - [ ] Notificações em tempo real (WebSockets)
 - [ ] Relatórios e estatísticas avançadas
-- [ ] Integração com APIs externas (medicamentos, interações)
+- [ ] Ampliação da base de interações medicamentosas
 - [ ] Sistema de chat entre pacientes e profissionais
 - [ ] Gráficos e visualizações de dados
 - [ ] Exportação de dados (PDF, Excel)
+- [ ] OCR automático para bulas e receitas (via Ollama local)
+- [ ] Extração de informações de eBooks farmacológicos (via Ollama local)
 
 ## 📖 Guias de Teste
 

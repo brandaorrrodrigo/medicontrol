@@ -2,7 +2,7 @@ import { prisma } from '../database/prisma'
 import { ExamStatus } from '@prisma/client'
 import type { CreateExamInput, UpdateExamInput } from './exams.validator'
 import fs from 'fs/promises'
-import path from 'path'
+import _path from 'path'
 
 export class ExamsService {
   // Listar exames de um paciente

@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export class ConsultationsController {
   // GET /api/consultations?patientId=xxx OR ?professionalId=xxx
-  async getConsultations(req: Request, res: Response, next: NextFunction) {
+  async getConsultations(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { patientId, professionalId } = req.query
 
@@ -30,18 +30,18 @@ export class ConsultationsController {
         message: 'patientId ou professionalId é obrigatório',
       })
     } catch (error) {
-      next(error)
+      return next(error)
     }
   }
 
   // GET /api/consultations/:id
-  async getConsultationById(req: Request, res: Response, next: NextFunction) {
+  async getConsultationById(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
 
       const consultation = await consultationsService.getConsultationById(id)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: consultation,
       })
@@ -52,19 +52,19 @@ export class ConsultationsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // POST /api/consultations
-  async createConsultation(req: Request, res: Response, next: NextFunction) {
+  async createConsultation(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const validatedData = createConsultationSchema.parse(req.body)
       const userId = req.user!.userId
 
       const consultation = await consultationsService.createConsultation(validatedData, userId)
 
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         data: consultation,
         message: 'Consulta criada com sucesso',
@@ -85,12 +85,12 @@ export class ConsultationsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // PUT /api/consultations/:id
-  async updateConsultation(req: Request, res: Response, next: NextFunction) {
+  async updateConsultation(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
       const validatedData = updateConsultationSchema.parse(req.body)
@@ -98,7 +98,7 @@ export class ConsultationsController {
 
       const consultation = await consultationsService.updateConsultation(id, validatedData, userId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: consultation,
         message: 'Consulta atualizada com sucesso',
@@ -122,57 +122,44 @@ export class ConsultationsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 
   // PATCH /api/consultations/:id/status
-  async updateStatus(req: Request, res: Response, next: NextFunction) {
+  // NOTE: updateStatus endpoint is disabled until schema is updated
+  // The 'status' field is not available in the current Prisma schema
+  async updateStatus(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
-      const { id } = req.params
-      const { status } = req.body
-      const userId = req.user!.userId
+      const { id: _id } = req.params
+      const { status: _status } = req.body
+      // userId would be needed for real implementation: req.user!.userId
 
-      if (!status || !['SCHEDULED', 'CONFIRMED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'].includes(status)) {
+      if (!_status || !['SCHEDULED', 'CONFIRMED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'].includes(_status)) {
         return res.status(400).json({
           error: 'Validation Error',
           message: 'Status inválido',
         })
       }
 
-      const consultation = await consultationsService.updateStatus(id, status, userId)
-
-      res.status(200).json({
-        success: true,
-        data: consultation,
-        message: 'Status atualizado com sucesso',
+      return res.status(501).json({
+        error: 'Not Implemented',
+        message: 'updateStatus endpoint is disabled until schema is updated',
       })
     } catch (error) {
-      if (error instanceof Error && error.message === 'Consulta não encontrada') {
-        return res.status(404).json({
-          error: 'Not Found',
-          message: error.message,
-        })
-      }
-      if (error instanceof Error && error.message === 'Acesso negado') {
-        return res.status(403).json({
-          error: 'Forbidden',
-          message: error.message,
-        })
-      }
-      next(error)
+      return next(error)
     }
   }
 
   // DELETE /api/consultations/:id
-  async deleteConsultation(req: Request, res: Response, next: NextFunction) {
+  async deleteConsultation(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = req.params
       const userId = req.user!.userId
 
       await consultationsService.deleteConsultation(id, userId)
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Consulta deletada com sucesso',
       })
@@ -189,7 +176,7 @@ export class ConsultationsController {
           message: error.message,
         })
       }
-      next(error)
+      return next(error)
     }
   }
 }
