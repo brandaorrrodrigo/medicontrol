@@ -1,13 +1,17 @@
 // @ts-nocheck
-import cron from 'node-cron'
+import * as cron from 'node-cron'
 import { prisma } from '../database/prisma'
 import { notificationsService } from '../notifications/notifications.service'
 
 export class ConsultationRemindersCron {
-  private task: cron.ScheduledTask | null = null
+  private task: any = null
 
   // Iniciar cron job
   start() {
+    if (!cron || !cron.schedule) {
+      console.warn('[CRON] node-cron não disponível, pulando consultation reminders')
+      return
+    }
     // Rodar a cada 1 hora
     this.task = cron.schedule('0 * * * *', async () => {
       console.log('[CRON] Verificando lembretes de consultas...')
