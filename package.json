@@ -15,6 +15,9 @@
     "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.9.3"
   }
 }
