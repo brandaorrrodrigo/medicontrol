@@ -253,7 +253,7 @@ export const MedicationCalendar: React.FC<MedicationCalendarProps> = ({
                     ? 'bg-gradient-to-br from-green-100 to-teal-100 dark:from-green-900/30 dark:to-teal-900/30'
                     : status?.someMissed
                     ? 'bg-gradient-to-br from-red-100 to-orange-100 dark:from-red-900/30 dark:to-orange-900/30'
-                    : status?.totalMeds > 0
+                    : status && status.totalMeds > 0
                     ? 'bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30'
                     : 'bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }

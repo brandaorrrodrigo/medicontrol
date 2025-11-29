@@ -63,7 +63,7 @@ export const ModernInput = forwardRef<HTMLInputElement, ModernInputProps>(
           )}
 
           {/* Input */}
-          <motion.input
+          <input
             ref={ref}
             type={inputType}
             className={`
@@ -77,11 +77,10 @@ export const ModernInput = forwardRef<HTMLInputElement, ModernInputProps>(
               placeholder:text-slate-400
               disabled:opacity-50 disabled:cursor-not-allowed
               focus:outline-none focus:ring-2 focus:ring-blue-500/20
+              focus:scale-[1.01]
             `}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            whileFocus={{ scale: 1.01 }}
-            transition={{ duration: 0.2 }}
             {...props}
           />
 

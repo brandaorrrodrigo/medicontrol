@@ -48,7 +48,7 @@ export interface Widget {
   data?: any
 }
 
-interface DashboardConfig {
+export interface DashboardConfig {
   widgets: Widget[]
   layout: 'grid' | 'masonry'
 }
