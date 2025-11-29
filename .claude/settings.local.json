@@ -23,7 +23,12 @@
       "Bash(docker:*)",
       "Bash(node scripts/setup-database.js:*)",
       "Bash(npx tsx:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

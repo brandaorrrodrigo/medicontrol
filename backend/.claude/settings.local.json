@@ -9,7 +9,9 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(timeout 180 npm run build)",
-      "WebFetch(domain:medicontrol-production.up.railway.app)"
+      "WebFetch(domain:medicontrol-production.up.railway.app)",
+      "Bash(psql:*)",
+      "Bash(docker:*)"
     ],
     "deny": [],
     "ask": []
