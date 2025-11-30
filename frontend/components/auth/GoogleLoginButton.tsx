@@ -19,8 +19,15 @@ declare global {
 export default function GoogleLoginButton({ onSuccess, onError }: GoogleLoginButtonProps) {
   const router = useRouter()
   const buttonRef = useRef<HTMLDivElement>(null)
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
 
   useEffect(() => {
+    // Não renderizar se não houver client_id configurado
+    if (!clientId) {
+      console.warn('Google Client ID não configurado. Defina NEXT_PUBLIC_GOOGLE_CLIENT_ID nas variáveis de ambiente.')
+      return
+    }
+
     // Load Google Identity Services script
     const script = document.createElement('script')
     script.src = 'https://accounts.google.com/gsi/client'
@@ -31,7 +38,7 @@ export default function GoogleLoginButton({ onSuccess, onError }: GoogleLoginBut
     script.onload = () => {
       if (window.google && buttonRef.current) {
         window.google.accounts.id.initialize({
-          client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
+          client_id: clientId,
           callback: handleCredentialResponse,
         })
 
@@ -51,7 +58,7 @@ export default function GoogleLoginButton({ onSuccess, onError }: GoogleLoginBut
     return () => {
       document.body.removeChild(script)
     }
-  }, [])
+  }, [clientId])
 
   const handleCredentialResponse = async (response: any) => {
     try {
