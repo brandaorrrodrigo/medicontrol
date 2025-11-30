@@ -19,7 +19,7 @@ export default function ChatPage() {
     {
       id: '1',
       role: 'assistant',
-      content: 'Olá! Sou a Dra. Ana, sua assistente virtual de saúde. Como posso ajudá-lo hoje?',
+      content: 'Olá! Sou a Dra. Fernanda Michetti, sua assistente virtual de saúde. Como posso ajudá-lo hoje?',
       timestamp: new Date(),
     },
   ])
@@ -126,7 +126,7 @@ export default function ChatPage() {
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Dra. Ana Silva
+                  Dra. Fernanda Michetti
                 </h1>
                 <Sparkles className="w-5 h-5 text-purple-500 animate-pulse" />
               </div>
