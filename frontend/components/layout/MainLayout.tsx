@@ -19,6 +19,7 @@ const navigationItems = {
   paciente: [
     { name: 'Dashboard', href: '/paciente/dashboard', icon: '📊' },
     { name: 'Alertas', href: '/paciente/alertas', icon: '🔔' },
+    { name: 'Chat com IA', href: '/paciente/chat', icon: '👩‍⚕️' },
     { name: 'Medicamentos', href: '/paciente/medicamentos', icon: '💊' },
     { name: 'Sinais Vitais', href: '/paciente/sinais-vitais', icon: '❤️' },
     { name: 'Exames', href: '/paciente/exames', icon: '🔬' },
