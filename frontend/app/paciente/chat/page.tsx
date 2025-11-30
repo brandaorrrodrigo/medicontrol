@@ -54,20 +54,39 @@ export default function ChatPage() {
 
     const utterance = new SpeechSynthesisUtterance(text)
 
-    // Configurar voz em português brasileiro
+    // Obter vozes disponíveis
     const voices = speechSynthesisRef.current.getVoices()
-    const ptBRVoice = voices.find(
-      (voice) => voice.lang === 'pt-BR' && voice.name.includes('Female')
-    ) || voices.find((voice) => voice.lang === 'pt-BR')
 
-    if (ptBRVoice) {
-      utterance.voice = ptBRVoice
+    // Priorizar vozes do Google (são as melhores)
+    // Depois vozes da Microsoft, depois qualquer voz pt-BR
+    const voicePriority = [
+      // Vozes do Google Chrome (melhor qualidade)
+      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Google') && (v.name.includes('female') || v.name.includes('Feminino'))),
+      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Google')),
+      // Vozes da Microsoft Edge
+      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Francisca')), // Melhor voz feminina PT-BR da Microsoft
+      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Maria')),
+      // Qualquer voz feminina pt-BR
+      voices.find((v) => v.lang === 'pt-BR' && (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('feminino'))),
+      // Fallback para qualquer voz pt-BR
+      voices.find((v) => v.lang === 'pt-BR'),
+      // Fallback para pt-PT (português de Portugal)
+      voices.find((v) => v.lang === 'pt-PT'),
+    ]
+
+    const selectedVoice = voicePriority.find((v) => v !== undefined)
+
+    if (selectedVoice) {
+      utterance.voice = selectedVoice
+      console.log('🎙️ Voz selecionada:', selectedVoice.name)
+    } else {
+      console.warn('⚠️ Nenhuma voz em português encontrada')
     }
 
     utterance.lang = 'pt-BR'
-    utterance.rate = 1.0 // Velocidade normal
-    utterance.pitch = 1.1 // Tom um pouco mais alto (voz feminina)
-    utterance.volume = 1.0 // Volume máximo
+    utterance.rate = 0.95 // Um pouco mais devagar = mais natural
+    utterance.pitch = 1.2 // Tom mais alto = voz feminina
+    utterance.volume = 1.0
 
     utterance.onstart = () => setIsSpeaking(true)
     utterance.onend = () => setIsSpeaking(false)
