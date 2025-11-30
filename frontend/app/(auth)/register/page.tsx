@@ -80,13 +80,13 @@ export default function RegisterPage() {
       // Redirecionar baseado no role
       switch (role) {
         case 'PATIENT':
-          router.push('/patient/dashboard')
+          router.push('/paciente/dashboard')
           break
         case 'CAREGIVER':
-          router.push('/caregiver/dashboard')
+          router.push('/cuidador/dashboard')
           break
         case 'PROFESSIONAL':
-          router.push('/professional/dashboard')
+          router.push('/profissional/dashboard')
           break
       }
     } catch (err: any) {

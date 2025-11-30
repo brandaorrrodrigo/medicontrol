@@ -16,13 +16,13 @@ export function useAuth(requiredRole?: UserRole) {
         // Redirecionar para o dashboard apropriado
         switch (user?.role) {
           case 'PATIENT':
-            router.push('/patient/dashboard')
+            router.push('/paciente/dashboard')
             break
           case 'CAREGIVER':
-            router.push('/caregiver/dashboard')
+            router.push('/cuidador/dashboard')
             break
           case 'PROFESSIONAL':
-            router.push('/professional/dashboard')
+            router.push('/profissional/dashboard')
             break
           default:
             router.push('/login')

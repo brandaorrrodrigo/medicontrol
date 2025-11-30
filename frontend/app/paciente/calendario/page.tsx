@@ -23,13 +23,13 @@ export default function CalendarPage() {
   const handleAddMedication = async (date: Date) => {
     // Redirecionar para página de adicionar medicamento com a data pré-selecionada
     const dateStr = date.toISOString().split('T')[0]
-    router.push(`/patient/medications/new?date=${dateStr}`)
+    router.push(`/paciente/medications/new?date=${dateStr}`)
   }
 
   const handleAddConsultation = async (date: Date) => {
     // Redirecionar para página de agendar consulta com a data pré-selecionada
     const dateStr = date.toISOString().split('T')[0]
-    router.push(`/patient/consultations/new?date=${dateStr}`)
+    router.push(`/paciente/consultations/new?date=${dateStr}`)
   }
 
   if (loading) {

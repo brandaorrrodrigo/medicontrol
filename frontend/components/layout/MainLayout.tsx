@@ -17,26 +17,26 @@ interface MainLayoutProps {
 
 const navigationItems = {
   paciente: [
-    { name: 'Dashboard', href: '/patient/dashboard', icon: '📊' },
+    { name: 'Dashboard', href: '/paciente/dashboard', icon: '📊' },
     { name: 'Alertas', href: '/paciente/alertas', icon: '🔔' },
-    { name: 'Medicamentos', href: '/patient/medications', icon: '💊' },
-    { name: 'Sinais Vitais', href: '/patient/vitals', icon: '❤️' },
-    { name: 'Exames', href: '/patient/exams', icon: '🔬' },
-    { name: 'Perfil', href: '/patient/profile', icon: '👤' },
+    { name: 'Medicamentos', href: '/paciente/medicamentos', icon: '💊' },
+    { name: 'Sinais Vitais', href: '/paciente/sinais-vitais', icon: '❤️' },
+    { name: 'Exames', href: '/paciente/exames', icon: '🔬' },
+    { name: 'Perfil', href: '/paciente/perfil', icon: '👤' },
   ],
   cuidador: [
-    { name: 'Dashboard', href: '/caregiver/dashboard', icon: '📊' },
-    { name: 'Pacientes', href: '/caregiver/patients', icon: '👥' },
-    { name: 'Medicamentos', href: '/caregiver/medications', icon: '💊' },
-    { name: 'Sinais Vitais', href: '/caregiver/vitals', icon: '❤️' },
-    { name: 'Exames', href: '/caregiver/exams', icon: '🔬' },
+    { name: 'Dashboard', href: '/cuidador/dashboard', icon: '📊' },
+    { name: 'Pacientes', href: '/cuidador/pacientes', icon: '👥' },
+    { name: 'Medicamentos', href: '/cuidador/medicamentos', icon: '💊' },
+    { name: 'Sinais Vitais', href: '/cuidador/sinais-vitais', icon: '❤️' },
+    { name: 'Exames', href: '/cuidador/exames', icon: '🔬' },
   ],
   profissional: [
-    { name: 'Dashboard', href: '/professional/dashboard', icon: '📊' },
-    { name: 'Pacientes', href: '/professional/patients', icon: '👥' },
-    { name: 'Consultas', href: '/professional/consultations', icon: '📋' },
-    { name: 'Prescrições', href: '/professional/prescriptions', icon: '📝' },
-    { name: 'Exames', href: '/professional/exams', icon: '🔬' },
+    { name: 'Dashboard', href: '/profissional/dashboard', icon: '📊' },
+    { name: 'Pacientes', href: '/profissional/pacientes', icon: '👥' },
+    { name: 'Consultas', href: '/profissional/consultas', icon: '📋' },
+    { name: 'Prescrições', href: '/profissional/prescricoes', icon: '📝' },
+    { name: 'Exames', href: '/profissional/exames', icon: '🔬' },
   ],
 }
 
@@ -173,7 +173,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, userType }) =>
                     </div>
 
                     <Link
-                      href={`/${userType === 'paciente' ? 'patient' : userType === 'cuidador' ? 'caregiver' : 'professional'}/profile`}
+                      href={`/${userType}/perfil`}
                       className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-700 transition"
                       onClick={() => setShowProfileMenu(false)}
                     >
