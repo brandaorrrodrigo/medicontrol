@@ -130,7 +130,7 @@ export const ModernMainLayout: React.FC<ModernMainLayoutProps> = ({ children, us
               </motion.div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 bg-clip-text text-transparent">
-                  MedicControl
+                  MedControl
                 </h1>
                 <p className="text-xs text-slate-500 -mt-1">{userTypeLabels[userType]}</p>
               </div>

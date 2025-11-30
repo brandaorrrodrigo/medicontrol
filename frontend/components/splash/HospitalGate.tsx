@@ -116,7 +116,7 @@ export default function HospitalGate({ onEnter }: HospitalGateProps) {
 
             {/* Título */}
             <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-teal-400 mb-3">
-              MedicControl
+              MedControl
             </h1>
             <p className="text-xl text-slate-300 font-light tracking-wide">
               Sistema de Administração de Medicamentos
@@ -293,7 +293,7 @@ export default function HospitalGate({ onEnter }: HospitalGateProps) {
                         Bem-vindo ao
                       </p>
                       <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300">
-                        Sistema MedicControl
+                        Sistema MedControl
                       </h2>
                       <p className="text-xl text-cyan-200 mt-4 font-light">
                         Iniciando sistemas de saúde inteligente...
