@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/useAuth'
+import { ModernMainLayout } from '@/components/layout/ModernMainLayout'
 import {
   BellIcon,
   AlertTriangleIcon,
@@ -77,6 +79,7 @@ interface Alert {
 }
 
 export default function AlertasPage() {
+  const { user, isLoading: authLoading } = useAuth('PATIENT')
   const router = useRouter()
   const [alerts, setAlerts] = useState<Alert[]>([])
   const [loading, setLoading] = useState(true)
@@ -197,8 +200,17 @@ export default function AlertasPage() {
 
   const unreadCount = alerts.filter((a) => !a.read).length
 
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <RefreshCwIcon className="w-8 h-8 text-gray-400 animate-spin" />
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <ModernMainLayout userType="paciente">
+      <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -428,5 +440,6 @@ export default function AlertasPage() {
         )}
       </div>
     </div>
+    </ModernMainLayout>
   )
 }
