@@ -1,5 +1,4 @@
 import express, { Express, Request, Response, NextFunction } from 'express'
-import cors from 'cors'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import rateLimit from 'express-rate-limit'
@@ -23,40 +22,76 @@ import calendarRoutes from './calendar/calendar.routes'
 
 const app: Express = express()
 
+// ========================
 // Middleware de segurança
+// ========================
 app.use(helmet())
 
-// CORS
-app.use(
-  cors({
-    origin: env.FRONTEND_URL,
-    credentials: true,
-  })
-)
+// ========================
+// CORS MANUAL – RESOLVE O ERRO DE "not equal to the supplied origin"
+// ========================
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const origin = req.headers.origin
 
+  const allowedOrigins = [
+    env.FRONTEND_URL?.trim(),
+    'https://medcontrol-six.vercel.app',
+    'https://medicontrol-olu292sal-rodrigos-projects-2fb5b2ab.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3000',
+  ].filter(Boolean) as string[]
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  }
+
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+
+  // Responde preflight imediatamente
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
+  next()
+})
+
+// ========================
 // Rate limiting
+// ========================
 const limiter = rateLimit({
-  windowMs: env.RATE_LIMIT_WINDOW_MS,
-  max: env.RATE_LIMIT_MAX_REQUESTS,
-  message: 'Too many requests from this IP, please try again later.',
+  windowMs: env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000,
+  max: env.RATE_LIMIT_MAX_REQUESTS || 100,
+  message: 'Muitas requisições deste IP, tente novamente mais tarde.',
+  standardHeaders: true,
+  legacyHeaders: false,
 })
 app.use('/api/', limiter)
 
-// Body parsers
-app.use(express.json())
+// ========================
+// Body parsers & cookies
+// ========================
+app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+// ========================
 // Health check
+// ========================
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
     status: 'ok',
     timestamp: new Date().toISOString(),
     environment: env.NODE_ENV,
+    frontendUrl: env.FRONTEND_URL,
   })
 })
 
-// API Routes
+// ========================
+// Rotas da API
+// ========================
 app.use('/api/auth', authRoutes)
 app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/notifications', notificationsRoutes)
@@ -72,7 +107,9 @@ app.use('/api/alerts', alertsRoutes)
 app.use('/api/gamification', gamificationRoutes)
 app.use('/api/calendar', calendarRoutes)
 
+// ========================
 // 404 Handler
+// ========================
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     error: 'Not Found',
@@ -80,13 +117,14 @@ app.use((req: Request, res: Response) => {
   })
 })
 
-// Error Handler
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error('Error:', err)
-
-  res.status(500).json({
+// ========================
+// Error Handler Global
+// ========================
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error('Erro não tratado:', err)
+  res.status(err.status || 500).json({
     error: 'Internal Server Error',
-    message: env.NODE_ENV === 'development' ? err.message : 'Something went wrong',
+    message: env.NODE_ENV === 'development' ? err.message : 'Algo deu errado',
     ...(env.NODE_ENV === 'development' && { stack: err.stack }),
   })
 })
