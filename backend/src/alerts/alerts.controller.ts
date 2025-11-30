@@ -20,8 +20,15 @@ import {
 
 export async function listAlerts(req: Request, res: Response) {
   try {
-    const userId = (req as any).userId
-    const patientId = (req as any).patientId
+    if (!req.user) {
+      return res.status(401).json({ error: 'Não autenticado' })
+    }
+
+    const userId = req.user.userId
+
+    // Para pacientes, usar seu próprio ID como patientId
+    // Para cuidadores e profissionais, precisariam especificar o patientId como query param
+    const patientId = req.query.patientId as string || userId
 
     // Validar query params
     const query = listAlertsQuerySchema.parse(req.query)
@@ -57,8 +64,12 @@ export async function listAlerts(req: Request, res: Response) {
 
 export async function countUnreadAlerts(req: Request, res: Response) {
   try {
-    const userId = (req as any).userId
-    const patientId = (req as any).patientId
+    if (!req.user) {
+      return res.status(401).json({ error: 'Não autenticado' })
+    }
+
+    const userId = req.user.userId
+    const patientId = req.query.patientId as string || userId
 
     const count = await alertsService.countUnreadAlerts(patientId, userId)
 
@@ -80,7 +91,11 @@ export async function countUnreadAlerts(req: Request, res: Response) {
 
 export async function markAlertAsRead(req: Request, res: Response) {
   try {
-    const userId = (req as any).userId
+    if (!req.user) {
+      return res.status(401).json({ error: 'Não autenticado' })
+    }
+
+    const userId = req.user.userId
     const { id } = markAlertReadParamSchema.parse(req.params)
 
     await alertsService.markAlertAsRead(id, userId)
@@ -114,7 +129,11 @@ export async function markAlertAsRead(req: Request, res: Response) {
 
 export async function resolveAlert(req: Request, res: Response) {
   try {
-    const userId = (req as any).userId
+    if (!req.user) {
+      return res.status(401).json({ error: 'Não autenticado' })
+    }
+
+    const userId = req.user.userId
     const { id } = resolveAlertParamSchema.parse(req.params)
 
     await alertsService.resolveAlert(id, userId)
@@ -148,8 +167,12 @@ export async function resolveAlert(req: Request, res: Response) {
 
 export async function readAllAlerts(req: Request, res: Response) {
   try {
-    const userId = (req as any).userId
-    const patientId = (req as any).patientId
+    if (!req.user) {
+      return res.status(401).json({ error: 'Não autenticado' })
+    }
+
+    const userId = req.user.userId
+    const patientId = req.query.patientId as string || userId
     const { type } = readAllAlertsBodySchema.parse(req.body)
 
     const count = await alertsService.markAllAlertsAsRead(
@@ -186,7 +209,11 @@ export async function readAllAlerts(req: Request, res: Response) {
 
 export async function refreshAlerts(req: Request, res: Response) {
   try {
-    const patientId = (req as any).patientId
+    if (!req.user) {
+      return res.status(401).json({ error: 'Não autenticado' })
+    }
+
+    const patientId = req.query.patientId as string || req.user.userId
     const { medicationId: _medicationId, types: _types } = refreshAlertsBodySchema.parse(req.body)
 
     // TODO: Se medicationId ou types forem fornecidos, filtrar a regeneração
