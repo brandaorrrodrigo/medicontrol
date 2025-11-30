@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { ModernMainLayout } from '@/components/layout/ModernMainLayout'
-import { Send, Sparkles, Bot, User, Loader2 } from 'lucide-react'
+import { Send, Sparkles, Bot, User, Loader2, Volume2, VolumeX } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface Message {
@@ -25,7 +25,10 @@ export default function ChatPage() {
   ])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [voiceEnabled, setVoiceEnabled] = useState(false)
+  const [isSpeaking, setIsSpeaking] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const speechSynthesisRef = useRef<SpeechSynthesis | null>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -34,6 +37,60 @@ export default function ChatPage() {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Inicializar Speech Synthesis
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      speechSynthesisRef.current = window.speechSynthesis
+    }
+  }, [])
+
+  // Função para falar o texto
+  const speak = (text: string) => {
+    if (!speechSynthesisRef.current || !voiceEnabled) return
+
+    // Cancelar qualquer fala em andamento
+    speechSynthesisRef.current.cancel()
+
+    const utterance = new SpeechSynthesisUtterance(text)
+
+    // Configurar voz em português brasileiro
+    const voices = speechSynthesisRef.current.getVoices()
+    const ptBRVoice = voices.find(
+      (voice) => voice.lang === 'pt-BR' && voice.name.includes('Female')
+    ) || voices.find((voice) => voice.lang === 'pt-BR')
+
+    if (ptBRVoice) {
+      utterance.voice = ptBRVoice
+    }
+
+    utterance.lang = 'pt-BR'
+    utterance.rate = 1.0 // Velocidade normal
+    utterance.pitch = 1.1 // Tom um pouco mais alto (voz feminina)
+    utterance.volume = 1.0 // Volume máximo
+
+    utterance.onstart = () => setIsSpeaking(true)
+    utterance.onend = () => setIsSpeaking(false)
+    utterance.onerror = () => setIsSpeaking(false)
+
+    speechSynthesisRef.current.speak(utterance)
+  }
+
+  // Parar a fala
+  const stopSpeaking = () => {
+    if (speechSynthesisRef.current) {
+      speechSynthesisRef.current.cancel()
+      setIsSpeaking(false)
+    }
+  }
+
+  // Toggle voice
+  const toggleVoice = () => {
+    if (voiceEnabled) {
+      stopSpeaking()
+    }
+    setVoiceEnabled(!voiceEnabled)
+  }
 
   const handleSend = async () => {
     if (!input.trim()) return
@@ -58,15 +115,22 @@ export default function ChatPage() {
         'Posso te ajudar com informações sobre seus medicamentos, horários, interações e muito mais. O que você gostaria de saber?',
       ]
 
+      const responseText = responses[Math.floor(Math.random() * responses.length)]
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: responses[Math.floor(Math.random() * responses.length)],
+        content: responseText,
         timestamp: new Date(),
       }
 
       setMessages((prev) => [...prev, assistantMessage])
       setIsTyping(false)
+
+      // Falar a resposta se o áudio estiver ativado
+      if (voiceEnabled) {
+        speak(responseText)
+      }
     }, 1500)
   }
 
@@ -136,9 +200,40 @@ export default function ChatPage() {
               </p>
             </div>
 
-            {/* Badge Médica */}
-            <div className="hidden md:block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-full shadow-lg">
-              Médica Especialista
+            {/* Controles */}
+            <div className="flex items-center gap-3">
+              {/* Badge Médica */}
+              <div className="hidden md:block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-full shadow-lg">
+                Médica Especialista
+              </div>
+
+              {/* Botão de Voz */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={toggleVoice}
+                className={`relative p-3 rounded-full shadow-lg transition-all ${
+                  voiceEnabled
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
+                    : 'bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-slate-400'
+                }`}
+                title={voiceEnabled ? 'Desativar voz' : 'Ativar voz'}
+              >
+                {voiceEnabled ? (
+                  <Volume2 className="w-5 h-5" />
+                ) : (
+                  <VolumeX className="w-5 h-5" />
+                )}
+
+                {/* Indicador de fala */}
+                {isSpeaking && (
+                  <motion.div
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ repeat: Infinity, duration: 0.8 }}
+                    className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"
+                  />
+                )}
+              </motion.button>
             </div>
           </div>
         </motion.div>
@@ -181,13 +276,34 @@ export default function ChatPage() {
                     <motion.div
                       initial={{ scale: 0.95 }}
                       animate={{ scale: 1 }}
-                      className={`px-4 py-3 rounded-2xl shadow-lg ${
+                      className={`relative px-4 py-3 rounded-2xl shadow-lg ${
                         message.role === 'user'
                           ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
                           : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-white border border-gray-200 dark:border-slate-700'
                       }`}
                     >
                       <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+
+                      {/* Indicador de áudio tocando */}
+                      {message.role === 'assistant' && isSpeaking && message.id === messages[messages.length - 1]?.id && (
+                        <div className="absolute -right-2 top-1/2 -translate-y-1/2 flex gap-0.5">
+                          <motion.div
+                            animate={{ height: [8, 16, 8] }}
+                            transition={{ repeat: Infinity, duration: 0.5, delay: 0 }}
+                            className="w-1 bg-green-500 rounded-full"
+                          />
+                          <motion.div
+                            animate={{ height: [8, 20, 8] }}
+                            transition={{ repeat: Infinity, duration: 0.5, delay: 0.1 }}
+                            className="w-1 bg-green-500 rounded-full"
+                          />
+                          <motion.div
+                            animate={{ height: [8, 14, 8] }}
+                            transition={{ repeat: Infinity, duration: 0.5, delay: 0.2 }}
+                            className="w-1 bg-green-500 rounded-full"
+                          />
+                        </div>
+                      )}
                     </motion.div>
                     <span className="text-xs text-gray-500 dark:text-slate-500 mt-1 px-2">
                       {message.timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
