@@ -223,6 +223,47 @@ export class AuthController {
       return next(error)
     }
   }
+
+  // POST /api/auth/google
+  async googleLogin(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+      const { credential } = req.body
+
+      if (!credential) {
+        return res.status(400).json({
+          success: false,
+          error: 'Google credential is required',
+        })
+      }
+
+      const result = await authService.googleLogin(credential)
+
+      // Definir refresh token como httpOnly cookie
+      res.cookie('refreshToken', result.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
+      })
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          user: result.user,
+          accessToken: result.accessToken,
+        },
+      })
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({
+          success: false,
+          error: error.message,
+        })
+      }
+
+      return next(error)
+    }
+  }
 }
 
 export const authController = new AuthController()

@@ -189,6 +189,32 @@ class AuthService {
       throw new Error(error.message || 'Erro ao resetar senha')
     }
   }
+
+  /**
+   * Login com Google
+   */
+  async googleLogin(credential: string): Promise<AuthResponse> {
+    const response = await fetch(`${API_BASE_URL}/auth/google`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ credential }),
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      throw new Error(error.error || 'Erro ao fazer login com Google')
+    }
+
+    const data: AuthResponse = await response.json()
+
+    // Salvar no store
+    useAuthStore.getState().login(data.data.user, data.data.accessToken)
+
+    return data
+  }
 }
 
 export const authService = new AuthService()

@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
+import { OAuth2Client } from 'google-auth-library'
 import { prisma } from '../database/prisma'
 import { env } from '../config/env'
 import { UserRole } from '@prisma/client'
@@ -335,6 +336,92 @@ export class AuthService {
       email: user.email,
       role: user.role,
       profile,
+    }
+  }
+
+  // Google Login
+  async googleLogin(credential: string): Promise<AuthResponse> {
+    const client = new OAuth2Client(env.GOOGLE_CLIENT_ID)
+
+    // Verificar o token do Google
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: env.GOOGLE_CLIENT_ID,
+    })
+
+    const payload = ticket.getPayload()
+    if (!payload || !payload.email) {
+      throw new Error('Token do Google inválido')
+    }
+
+    const { email, name, picture } = payload
+
+    // Verificar se o usuário já existe
+    let user = await prisma.user.findUnique({
+      where: { email },
+      include: {
+        patient: true,
+        caregiver: true,
+        professional: true,
+      },
+    })
+
+    // Se não existir, criar novo usuário como PACIENTE por padrão
+    if (!user) {
+      // Gerar senha aleatória (não será usada, mas é obrigatória no schema)
+      const randomPassword = crypto.randomBytes(32).toString('hex')
+      const hashedPassword = await bcrypt.hash(randomPassword, 12)
+
+      user = await prisma.user.create({
+        data: {
+          email,
+          password: hashedPassword,
+          role: UserRole.PATIENT,
+          patient: {
+            create: {
+              name: name || email.split('@')[0],
+              dateOfBirth: new Date(2000, 0, 1), // Data padrão
+              phone: '',
+              gender: 'O' as const,
+              bloodType: '',
+            },
+          },
+        },
+        include: {
+          patient: true,
+          caregiver: true,
+          professional: true,
+        },
+      })
+    }
+
+    // Gerar tokens
+    const accessToken = this.generateAccessToken(user.id, user.email, user.role)
+    const refreshToken = this.generateRefreshToken()
+
+    // Armazenar refresh token
+    await prisma.refreshToken.create({
+      data: {
+        token: refreshToken,
+        userId: user.id,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 dias
+      },
+    })
+
+    let profile: any = null
+    if (user.patient) profile = user.patient
+    else if (user.caregiver) profile = user.caregiver
+    else if (user.professional) profile = user.professional
+
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        name: profile?.name || email.split('@')[0],
+      },
+      accessToken,
+      refreshToken,
     }
   }
 }
