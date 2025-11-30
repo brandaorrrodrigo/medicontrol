@@ -11,6 +11,28 @@ const nextConfig = {
     }
     return config
   },
+  async redirects() {
+    return [
+      // Redirects de rotas em inglês para português - Paciente
+      {
+        source: '/patient/:path*',
+        destination: '/paciente/:path*',
+        permanent: true,
+      },
+      // Redirects de rotas em inglês para português - Cuidador
+      {
+        source: '/caregiver/:path*',
+        destination: '/cuidador/:path*',
+        permanent: true,
+      },
+      // Redirects de rotas em inglês para português - Profissional
+      {
+        source: '/professional/:path*',
+        destination: '/profissional/:path*',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
