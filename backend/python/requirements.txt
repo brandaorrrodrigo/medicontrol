@@ -1,0 +1,12 @@
+# TTS (Coqui)
+TTS==0.22.0
+
+# PyTorch (CUDA 11.8 - compatível com RTX 3090)
+torch==2.1.2+cu118
+torchaudio==2.1.2+cu118
+
+# Outras dependências
+numpy>=1.24.0
+scipy>=1.11.0
+librosa>=0.10.0
+soundfile>=0.12.0

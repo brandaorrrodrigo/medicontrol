@@ -19,6 +19,7 @@ import consultationsRoutes from './consultations/consultations.routes'
 import alertsRoutes from './alerts/alerts.routes'
 import gamificationRoutes from './gamification/gamification.routes'
 import calendarRoutes from './calendar/calendar.routes'
+import ttsRoutes from './tts/tts.routes'
 
 const app: Express = express()
 
@@ -106,6 +107,7 @@ app.use('/api/consultations', consultationsRoutes)
 app.use('/api/alerts', alertsRoutes)
 app.use('/api/gamification', gamificationRoutes)
 app.use('/api/calendar', calendarRoutes)
+app.use('/api/tts', ttsRoutes)
 
 // ========================
 // 404 Handler

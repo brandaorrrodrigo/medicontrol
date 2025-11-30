@@ -45,54 +45,51 @@ export default function ChatPage() {
     }
   }, [])
 
-  // Função para falar o texto
-  const speak = (text: string) => {
-    if (!speechSynthesisRef.current || !voiceEnabled) return
+  // Função para falar o texto usando XTTS v2 (backend)
+  const speak = async (text: string) => {
+    if (!voiceEnabled) return
 
-    // Cancelar qualquer fala em andamento
-    speechSynthesisRef.current.cancel()
+    try {
+      setIsSpeaking(true)
 
-    const utterance = new SpeechSynthesisUtterance(text)
+      console.log('🎙️ Gerando áudio com XTTS v2...')
 
-    // Obter vozes disponíveis
-    const voices = speechSynthesisRef.current.getVoices()
+      // Chamar API do backend
+      const response = await fetch('http://localhost:3001/api/tts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text }),
+      })
 
-    // Priorizar vozes do Google (são as melhores)
-    // Depois vozes da Microsoft, depois qualquer voz pt-BR
-    const voicePriority = [
-      // Vozes do Google Chrome (melhor qualidade)
-      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Google') && (v.name.includes('female') || v.name.includes('Feminino'))),
-      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Google')),
-      // Vozes da Microsoft Edge
-      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Francisca')), // Melhor voz feminina PT-BR da Microsoft
-      voices.find((v) => v.lang === 'pt-BR' && v.name.includes('Maria')),
-      // Qualquer voz feminina pt-BR
-      voices.find((v) => v.lang === 'pt-BR' && (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('feminino'))),
-      // Fallback para qualquer voz pt-BR
-      voices.find((v) => v.lang === 'pt-BR'),
-      // Fallback para pt-PT (português de Portugal)
-      voices.find((v) => v.lang === 'pt-PT'),
-    ]
+      if (!response.ok) {
+        throw new Error('Erro ao gerar áudio')
+      }
 
-    const selectedVoice = voicePriority.find((v) => v !== undefined)
+      // Obter blob de áudio
+      const audioBlob = await response.blob()
+      const audioUrl = URL.createObjectURL(audioBlob)
 
-    if (selectedVoice) {
-      utterance.voice = selectedVoice
-      console.log('🎙️ Voz selecionada:', selectedVoice.name)
-    } else {
-      console.warn('⚠️ Nenhuma voz em português encontrada')
+      // Criar elemento de áudio e tocar
+      const audio = new Audio(audioUrl)
+
+      audio.onended = () => {
+        setIsSpeaking(false)
+        URL.revokeObjectURL(audioUrl) // Liberar memória
+      }
+
+      audio.onerror = () => {
+        setIsSpeaking(false)
+        console.error('Erro ao tocar áudio')
+      }
+
+      await audio.play()
+      console.log('✅ Áudio tocando!')
+    } catch (error) {
+      console.error('Erro ao gerar/tocar áudio:', error)
+      setIsSpeaking(false)
     }
-
-    utterance.lang = 'pt-BR'
-    utterance.rate = 0.95 // Um pouco mais devagar = mais natural
-    utterance.pitch = 1.2 // Tom mais alto = voz feminina
-    utterance.volume = 1.0
-
-    utterance.onstart = () => setIsSpeaking(true)
-    utterance.onend = () => setIsSpeaking(false)
-    utterance.onerror = () => setIsSpeaking(false)
-
-    speechSynthesisRef.current.speak(utterance)
   }
 
   // Parar a fala
