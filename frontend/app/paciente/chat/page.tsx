@@ -28,7 +28,6 @@ export default function ChatPage() {
   const [voiceEnabled, setVoiceEnabled] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const speechSynthesisRef = useRef<SpeechSynthesis | null>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -38,78 +37,9 @@ export default function ChatPage() {
     scrollToBottom()
   }, [messages])
 
-  // Inicializar Speech Synthesis
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      speechSynthesisRef.current = window.speechSynthesis
-    }
-  }, [])
-
-  // Função para falar o texto usando XTTS v2 (backend)
-  const speak = async (text: string) => {
-    if (!voiceEnabled) return
-
-    try {
-      setIsSpeaking(true)
-
-      console.log('🎙️ Gerando áudio com XTTS v2...')
-
-      // Chamar API do backend
-      const response = await fetch('http://localhost:3001/api/tts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text }),
-      })
-
-      if (!response.ok) {
-        throw new Error('Erro ao gerar áudio')
-      }
-
-      // Obter blob de áudio
-      const audioBlob = await response.blob()
-      const audioUrl = URL.createObjectURL(audioBlob)
-
-      // Criar elemento de áudio e tocar
-      const audio = new Audio(audioUrl)
-
-      audio.onended = () => {
-        setIsSpeaking(false)
-        URL.revokeObjectURL(audioUrl) // Liberar memória
-      }
-
-      audio.onerror = () => {
-        setIsSpeaking(false)
-        console.error('Erro ao tocar áudio')
-      }
-
-      await audio.play()
-      console.log('✅ Áudio tocando!')
-    } catch (error) {
-      console.error('Erro ao gerar/tocar áudio:', error)
-      setIsSpeaking(false)
-    }
-  }
-
-  // Parar a fala
-  const stopSpeaking = () => {
-    if (speechSynthesisRef.current) {
-      speechSynthesisRef.current.cancel()
-      setIsSpeaking(false)
-    }
-  }
-
-  // Toggle voice
-  const toggleVoice = () => {
-    if (voiceEnabled) {
-      stopSpeaking()
-    }
-    setVoiceEnabled(!voiceEnabled)
-  }
-
+  // Função real que chama seu backend com RAG + PDFs da pasta medlibrary
   const handleSend = async () => {
-    if (!input.trim()) return
+    if (!input.trim() || isTyping) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -118,36 +48,50 @@ export default function ChatPage() {
       timestamp: new Date(),
     }
 
-    setMessages((prev) => [...prev, userMessage])
+    setMessages(prev => [...prev, userMessage])
     setInput('')
     setIsTyping(true)
 
-    // Simular resposta da IA (você pode integrar com uma API real depois)
-    setTimeout(() => {
-      const responses = [
-        'Entendo sua preocupação. Com base no seu histórico de medicamentos, recomendo que você consulte seu médico sobre isso.',
-        'Ótima pergunta! Deixe-me verificar suas informações e te dar a melhor resposta possível.',
-        'Vejo que você está tomando seus medicamentos regularmente. Continue assim! Tem mais alguma dúvida?',
-        'Posso te ajudar com informações sobre seus medicamentos, horários, interações e muito mais. O que você gostaria de saber?',
-      ]
+    try {
+      const response = await fetch('https://medicontrol-production.up.railway.app/api/ai-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          message: input,
+          history: messages.map(m => ({ role: m.role, content: m.content })),
+        }),
+      })
 
-      const responseText = responses[Math.floor(Math.random() * responses.length)]
+      const data = await response.json()
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: responseText,
+        content: data.response || 'Desculpe, não consegui processar sua pergunta.',
         timestamp: new Date(),
       }
 
-      setMessages((prev) => [...prev, assistantMessage])
-      setIsTyping(false)
+      setMessages(prev => [...prev, assistantMessage])
 
-      // Falar a resposta se o áudio estiver ativado
-      if (voiceEnabled) {
-        speak(responseText)
+      // Se tiver TTS ativado no backend, ele já retorna audioUrl (opcional)
+      if (voiceEnabled && data.audioUrl) {
+        const audio = new Audio(data.audioUrl)
+        audio.play()
       }
-    }, 1500)
+
+    } catch (error) {
+      setMessages(prev => [...prev, {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: 'Desculpe, estou com dificuldade para me conectar no momento. Tente novamente em alguns segundos.',
+        timestamp: new Date(),
+      }])
+    } finally {
+      setIsTyping(false)
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -169,40 +113,23 @@ export default function ChatPage() {
     <ModernMainLayout userType="paciente">
       <div className="h-[calc(100vh-5rem)] flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900/20 dark:to-pink-900/20">
         {/* Header com Avatar da Doutora */}
-        <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-b border-gray-200 dark:border-slate-700 p-6 shadow-lg"
-        >
+        <motion.div initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-b border-gray-200 dark:border-slate-700 p-6 shadow-lg">
           <div className="max-w-4xl mx-auto flex items-center gap-4">
-            {/* Avatar da Doutora - Ultra Moderno */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 200 }}
-              className="relative"
-            >
+            {/* Avatar da Doutora */}
+            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 200 }} className="relative">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 p-0.5 shadow-2xl shadow-purple-500/50">
                 <div className="w-full h-full rounded-full bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden">
-                  {/* Estilização da Doutora */}
                   <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30">
-                    <div className="text-3xl">👩‍⚕️</div>
-                    {/* Óculos overlay */}
+                    <div className="text-3xl">Female Doctor</div>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-2xl opacity-80">👓</div>
+                      <div className="text-2xl opacity-80">Glasses</div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* Indicador Online */}
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full"
-              />
+              <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full" />
             </motion.div>
 
-            {/* Info da Doutora */}
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -212,43 +139,17 @@ export default function ChatPage() {
               </div>
               <p className="text-sm text-gray-600 dark:text-slate-400 flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                Online agora • Assistente de Saúde IA
+                Online agora • Assistente de Saúde IA com base nos seus eBooks
               </p>
             </div>
 
-            {/* Controles */}
             <div className="flex items-center gap-3">
-              {/* Badge Médica */}
               <div className="hidden md:block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-full shadow-lg">
                 Médica Especialista
               </div>
-
-              {/* Botão de Voz */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={toggleVoice}
-                className={`relative p-3 rounded-full shadow-lg transition-all ${
-                  voiceEnabled
-                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
-                    : 'bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-slate-400'
-                }`}
-                title={voiceEnabled ? 'Desativar voz' : 'Ativar voz'}
-              >
-                {voiceEnabled ? (
-                  <Volume2 className="w-5 h-5" />
-                ) : (
-                  <VolumeX className="w-5 h-5" />
-                )}
-
-                {/* Indicador de fala */}
-                {isSpeaking && (
-                  <motion.div
-                    animate={{ scale: [1, 1.3, 1] }}
-                    transition={{ repeat: Infinity, duration: 0.8 }}
-                    className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"
-                  />
-                )}
+              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setVoiceEnabled(!voiceEnabled)}
+                className={`relative p-3 rounded-full shadow-lg transition-all ${voiceEnabled ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white' : 'bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-slate-400'}`}>
+                {voiceEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
               </motion.button>
             </div>
           </div>
@@ -259,23 +160,16 @@ export default function ChatPage() {
           <div className="max-w-4xl mx-auto space-y-4">
             <AnimatePresence mode="popLayout">
               {messages.map((message) => (
-                <motion.div
-                  key={message.id}
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                  className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
-                >
-                  {/* Avatar */}
+                <motion.div key={message.id} initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                  className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                   <div className="flex-shrink-0">
                     {message.role === 'assistant' ? (
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 p-0.5 shadow-lg">
                         <div className="w-full h-full rounded-full bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden">
                           <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30">
-                            <div className="text-xl">👩‍⚕️</div>
+                            <div className="text-xl">Female Doctor</div>
                             <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="text-sm opacity-80">👓</div>
+                              <div className="text-sm opacity-80">Glasses</div>
                             </div>
                           </div>
                         </div>
@@ -287,39 +181,10 @@ export default function ChatPage() {
                     )}
                   </div>
 
-                  {/* Mensagem */}
                   <div className={`flex flex-col max-w-[70%] ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
-                    <motion.div
-                      initial={{ scale: 0.95 }}
-                      animate={{ scale: 1 }}
-                      className={`relative px-4 py-3 rounded-2xl shadow-lg ${
-                        message.role === 'user'
-                          ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
-                          : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-white border border-gray-200 dark:border-slate-700'
-                      }`}
-                    >
+                    <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }}
+                      className={`relative px-4 py-3 rounded-2xl shadow-lg ${message.role === 'user' ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white' : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-white border border-gray-200 dark:border-slate-700'}`}>
                       <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-
-                      {/* Indicador de áudio tocando */}
-                      {message.role === 'assistant' && isSpeaking && message.id === messages[messages.length - 1]?.id && (
-                        <div className="absolute -right-2 top-1/2 -translate-y-1/2 flex gap-0.5">
-                          <motion.div
-                            animate={{ height: [8, 16, 8] }}
-                            transition={{ repeat: Infinity, duration: 0.5, delay: 0 }}
-                            className="w-1 bg-green-500 rounded-full"
-                          />
-                          <motion.div
-                            animate={{ height: [8, 20, 8] }}
-                            transition={{ repeat: Infinity, duration: 0.5, delay: 0.1 }}
-                            className="w-1 bg-green-500 rounded-full"
-                          />
-                          <motion.div
-                            animate={{ height: [8, 14, 8] }}
-                            transition={{ repeat: Infinity, duration: 0.5, delay: 0.2 }}
-                            className="w-1 bg-green-500 rounded-full"
-                          />
-                        </div>
-                      )}
                     </motion.div>
                     <span className="text-xs text-gray-500 dark:text-slate-500 mt-1 px-2">
                       {message.timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
@@ -329,40 +194,23 @@ export default function ChatPage() {
               ))}
             </AnimatePresence>
 
-            {/* Indicador de digitação */}
             {isTyping && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex gap-3"
-              >
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 p-0.5 shadow-lg">
                   <div className="w-full h-full rounded-full bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden">
                     <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30">
-                      <div className="text-xl">👩‍⚕️</div>
+                      <div className="text-xl">Female Doctor</div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-sm opacity-80">👓</div>
+                        <div className="text-sm opacity-80">Glasses</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 px-4 py-3 rounded-2xl shadow-lg">
                   <div className="flex gap-1">
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: 0 }}
-                      className="w-2 h-2 bg-purple-500 rounded-full"
-                    />
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }}
-                      className="w-2 h-2 bg-purple-500 rounded-full"
-                    />
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }}
-                      className="w-2 h-2 bg-purple-500 rounded-full"
-                    />
+                    <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 0.6 }} className="w-2 h-2 bg-purple-500 rounded-full" />
+                    <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} className="w-2 h-2 bg-purple-500 rounded-full" />
+                    <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} className="w-2 h-2 bg-purple-500 rounded-full" />
                   </div>
                 </div>
               </motion.div>
@@ -372,12 +220,8 @@ export default function ChatPage() {
           </div>
         </div>
 
-        {/* Input Area - Ultra Moderno */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-t border-gray-200 dark:border-slate-700 p-4 shadow-2xl"
-        >
+        {/* Input Area */}
+        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-t border-gray-200 dark:border-slate-700 p-4 shadow-2xl">
           <div className="max-w-4xl mx-auto">
             <div className="relative flex items-end gap-2">
               <div className="flex-1 relative">
@@ -385,7 +229,7 @@ export default function ChatPage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Escreva sua mensagem..."
+                  placeholder="Escreva sua pergunta sobre saúde, medicamentos ou os eBooks..."
                   rows={1}
                   className="w-full px-4 py-3 pr-12 bg-gray-50 dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-700 rounded-2xl focus:border-purple-500 dark:focus:border-purple-400 focus:outline-none resize-none text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 transition-all"
                   style={{ minHeight: '48px', maxHeight: '120px' }}
@@ -398,7 +242,7 @@ export default function ChatPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSend}
-                disabled={!input.trim()}
+                disabled={isTyping || !input.trim()}
                 className="h-12 px-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-2xl font-semibold shadow-lg shadow-purple-500/50 hover:shadow-xl hover:shadow-purple-500/60 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
               >
                 <Send className="w-5 h-5" />
@@ -406,16 +250,10 @@ export default function ChatPage() {
               </motion.button>
             </div>
 
-            {/* Sugestões rápidas */}
             <div className="mt-3 flex flex-wrap gap-2">
-              {['Meus medicamentos', 'Horários de hoje', 'Interações', 'Dúvidas'].map((suggestion) => (
-                <motion.button
-                  key={suggestion}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setInput(suggestion)}
-                  className="px-3 py-1.5 text-xs bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 rounded-full hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50 transition-all border border-blue-200 dark:border-blue-800"
-                >
+              {['Meus medicamentos', 'Horários de hoje', 'Interações', 'Alimentação saudável', 'Efeitos colaterais'].map((suggestion) => (
+                <motion.button key={suggestion} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setInput(suggestion)}
+                  className="px-3 py-1.5 text-xs bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 rounded-full hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50 transition-all border border-blue-200 dark:border-blue-800">
                   {suggestion}
                 </motion.button>
               ))}
